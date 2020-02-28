@@ -1,0 +1,2 @@
+# VMDtoEXOGenerator
+VMDからAviutl拡張編集オブジェクトを生成する
