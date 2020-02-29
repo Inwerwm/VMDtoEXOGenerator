@@ -135,6 +135,7 @@
             this.checkedListBoxKey.Name = "checkedListBoxKey";
             this.checkedListBoxKey.Size = new System.Drawing.Size(213, 364);
             this.checkedListBoxKey.TabIndex = 5;
+            this.checkedListBoxKey.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxKey_ItemCheck);
             // 
             // labelKey
             // 
@@ -408,6 +409,7 @@
             0,
             0,
             0});
+            this.numericALayer.ValueChanged += new System.EventHandler(this.numericALayer_ValueChanged);
             // 
             // labelALayer
             // 
@@ -436,6 +438,7 @@
             0,
             0,
             0});
+            this.numericAVolume.ValueChanged += new System.EventHandler(this.numericAVolume_ValueChanged);
             // 
             // numericAPlaySpeed
             // 
@@ -460,6 +463,7 @@
             0,
             0,
             0});
+            this.numericAPlaySpeed.ValueChanged += new System.EventHandler(this.numericAPlaySpeed_ValueChanged);
             // 
             // numericAPan
             // 
@@ -479,6 +483,7 @@
             this.numericAPan.Name = "numericAPan";
             this.numericAPan.Size = new System.Drawing.Size(140, 29);
             this.numericAPan.TabIndex = 1;
+            this.numericAPan.ValueChanged += new System.EventHandler(this.numericAPan_ValueChanged);
             // 
             // numericAPlayPos
             // 
@@ -492,6 +497,7 @@
             this.numericAPlayPos.Name = "numericAPlayPos";
             this.numericAPlayPos.Size = new System.Drawing.Size(140, 29);
             this.numericAPlayPos.TabIndex = 1;
+            this.numericAPlayPos.ValueChanged += new System.EventHandler(this.numericAPlayPos_ValueChanged);
             // 
             // labelVolume
             // 
@@ -513,6 +519,7 @@
             this.numericAStartOffset.Name = "numericAStartOffset";
             this.numericAStartOffset.Size = new System.Drawing.Size(140, 29);
             this.numericAStartOffset.TabIndex = 1;
+            this.numericAStartOffset.ValueChanged += new System.EventHandler(this.numericAStartOffset_ValueChanged);
             // 
             // labelAPan
             // 

@@ -52,7 +52,7 @@ namespace AviutlExEditObject
         }
     }
 
-    class ExEditObject
+    public class ExEditObject
     {
         public int Start { set; get; }
         public int End { set; get; }
@@ -101,7 +101,7 @@ namespace AviutlExEditObject
         }
     }
 
-    interface IExObjectType
+    public interface IExObjectType
     {
         string ToString();
 
@@ -118,7 +118,7 @@ namespace AviutlExEditObject
         void SetBy(List<object> list);
     }
 
-    class ExoAudio : IExObjectType
+    public class ExoAudio : IExObjectType
     {
         public float Start { get; set; }
         public float Speed { get; set; }
@@ -154,15 +154,20 @@ namespace AviutlExEditObject
 
         public void SetBy(List<object> list)
         {
-            Start = (float)list[0];
-            Speed = (float)list[1];
-            Loop = (bool)list[2];
-            Linkage = (bool)list[3];
-            FilePath = (string)list[4];
+            if (list[0] != null)
+                Start = (float)list[0];
+            if (list[1] != null)
+                Speed = (float)list[1];
+            if (list[2] != null)
+                Loop = (bool)list[2];
+            if (list[3] != null)
+                Linkage = (bool)list[3];
+            if (list[4] != null)
+                FilePath = (string)list[4];
         }
     }
 
-    class ExoStandardPlay : IExObjectType
+    public class ExoStandardPlay : IExObjectType
     {
         public float Volume { get; set; }
         public float Side { get; set; }
@@ -189,8 +194,10 @@ namespace AviutlExEditObject
 
         public void SetBy(List<object> list)
         {
-            Volume = (float)list[0];
-            Side = (float)list[1];
+            if (list[0] != null)
+                Volume = (float)list[0];
+            if (list[1] != null)
+                Side = (float)list[1];
         }
     }
 }

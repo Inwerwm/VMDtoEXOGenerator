@@ -13,20 +13,20 @@ namespace VMDtoEXOGenerator
         VocaloidMotionData vmd;
         ExEditObjectData exo;
 
-        List<StrBl> KeyAndBool;
+        List<(string Name, bool Checked)> Key;
         List<ObjectData> ObjectList;
 
-        bool canTabChange;
+        bool canChangeTab;
+        bool skipCheckListChange;
 
         public MainForm()
         {
             InitializeComponent();
             vmd = new VocaloidMotionData();
-            exo = new ExEditObjectData();
             ObjectList = new List<ObjectData>();
 
-            canTabChange = false;
-
+            canChangeTab = false;
+            skipCheckListChange = false;
             // バージョン表記
             labelVersion.Text = "Version 1.0";
         }
@@ -34,7 +34,7 @@ namespace VMDtoEXOGenerator
         private void SetCheckedListBoxKey()
         {
             checkedListBoxKey.Items.Clear();
-            checkedListBoxKey.Items.AddRange(KeyAndBool.Select(k => k.Str).ToArray());
+            checkedListBoxKey.Items.AddRange(Key.Select(k => k.Name).ToArray());
         }
 
         private void OpenVMD(string[] path)
@@ -57,7 +57,7 @@ namespace VMDtoEXOGenerator
             vmd.MotionFrames.Distinct(new VmdMotionFrameDataEqualityComparer());
             vmd.MorphFrames.Distinct(new VmdMorphFrameDataEqualityComparer());
 
-            KeyAndBool = vmd.GetKeyNames(VocaloidMotionData.GetKeyIgnoring.FirstFrame).ConvertAll(n => new StrBl(n));
+            Key = vmd.GetKeyNames(VocaloidMotionData.GetKeyIgnoring.FirstFrame).ConvertAll(n => (n, false));
             SetCheckedListBoxKey();
         }
 
@@ -69,10 +69,9 @@ namespace VMDtoEXOGenerator
                 {
                     case ".wav":
                     case ".mp3":
-                        if (!ObjectList.Select(o=>o.Path).Contains(str))
+                        if (!ObjectList.Select(o => o.Path).Contains(str))
                         {
-                            exo.Objects.Add(makeAudioObject(str));
-                            ObjectList.Add(new ObjectData(str, ObjectType.Audio));
+                            ObjectList.Add(new ObjectData(str, ObjectType.Audio, makeAudioObject(str)));
                         }
                         break;
                     default:
@@ -99,7 +98,7 @@ namespace VMDtoEXOGenerator
         private void tabControlProperty_Selecting(object sender, TabControlCancelEventArgs e)
         {
             //ユーザーによるタブ移動を禁止する
-            e.Cancel = !canTabChange;
+            e.Cancel = !canChangeTab;
         }
 
         private void buttonOpenVMD_Click(object sender, EventArgs e)
@@ -157,7 +156,7 @@ namespace VMDtoEXOGenerator
         private void listBoxSetee_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = listBoxSetee.SelectedIndex;
-            canTabChange = true;
+            canChangeTab = true;
             switch (ObjectList[id].Type)
             {
                 case ObjectType.Audio:
@@ -171,19 +170,33 @@ namespace VMDtoEXOGenerator
                 default:
                     break;
             }
-            canTabChange = false;
+            SetCheckedKey(id);
+            canChangeTab = false;
+        }
+
+        public void SetCheckedKey(int id)
+        {
+            if (checkedListBoxKey.Items.Count==0)
+                return;
+
+            skipCheckListChange = true;
+            for (int i = 0; i < checkedListBoxKey.Items.Count; i++)
+            {
+                checkedListBoxKey.SetItemChecked(i, ObjectList[id].Keys.Contains(checkedListBoxKey.Items[i].ToString()));
+            }
+            skipCheckListChange = false;
         }
 
         private void SetAudioParameter(int id)
         {
-            numericALayer.Value = exo.Objects[id].Layer;
+            numericALayer.Value = ObjectList[id].ExObject.Layer;
             numericAStartOffset.Value = ObjectList[id].Offset;
 
             //makeAudioObject() が ExAudio → ExoStandardPlay の順でオーディオデータを入力
             List<object> pList;
 
             //ExAudio
-            pList = exo.Objects[id].Property[0].ToList();
+            pList = ObjectList[id].ExObject.Property[0].ToList();
             //0:Start
             numericAPlayPos.Value = (decimal)(float)pList[0];
             //1:Speed 
@@ -194,25 +207,73 @@ namespace VMDtoEXOGenerator
             textBoxAFilePath.Text = (string)pList[4];
 
             //ExoStandardPlay
-            pList = exo.Objects[id].Property[1].ToList();
+            pList = ObjectList[id].ExObject.Property[1].ToList();
             //0:Volume
             numericAVolume.Value = (decimal)(float)pList[0];
             //1:Side
             numericAPan.Value = (decimal)(float)pList[1];
         }
-    }
 
-    public class StrBl
-    {
-        public string Str { get; set; }
-        public bool Bl { get; set; }
-
-        public StrBl(string str = "", bool bl = false)
+        private void numericAStartOffset_ValueChanged(object sender, EventArgs e)
         {
-            Str = str;
-            Bl = bl;
+            int id = listBoxSetee.SelectedIndex;
+            ObjectList[id].Offset = (int)numericAStartOffset.Value;
+        }
+
+        private void numericALayer_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            ObjectList[id].ExObject.Layer = (int)numericALayer.Value;
+        }
+
+        private void numericAPlayPos_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            var l = new List<object> { (float)numericAPlayPos.Value, null, null, null, null };
+            ObjectList[id].ExObject.Property[0].SetBy(l);
+        }
+
+        private void numericAPlaySpeed_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            var l = new List<object> { null, (float)numericAPlaySpeed.Value, null, null, null };
+            ObjectList[id].ExObject.Property[0].SetBy(l);
+        }
+
+        private void numericAVolume_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            var l = new List<object> { (float)numericAVolume.Value, null };
+            ObjectList[id].ExObject.Property[1].SetBy(l);
+        }
+
+        private void numericAPan_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            var l = new List<object> { null, (float)numericAPan.Value };
+            ObjectList[id].ExObject.Property[1].SetBy(l);
+        }
+
+        private void checkedListBoxKey_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (skipCheckListChange)
+                return;
+
+            int id = listBoxSetee.SelectedIndex;
+            if (id == -1)
+                return;
+
+            if (e.NewValue==CheckState.Checked)
+            {
+                ObjectList[id].Keys.Add(checkedListBoxKey.Items[e.Index].ToString());
+            }
+            else
+            {
+                ObjectList[id].Keys.Remove(checkedListBoxKey.Items[e.Index].ToString());
+            }
         }
     }
+
     public enum ObjectType
     {
         Audio,
@@ -224,12 +285,16 @@ namespace VMDtoEXOGenerator
         public string Path { get; set; }
         public ObjectType Type { get; set; }
         public int Offset { get; set; }
+        public ExEditObject ExObject { get; set; }
+        public List<string> Keys { get; private set; }
 
-        public ObjectData(string path, ObjectType type, int offset = 0)
+        public ObjectData(string path, ObjectType type, ExEditObject obj, int offset = 0)
         {
             Path = path;
             Type = type;
             Offset = offset;
+            ExObject = obj;
+            Keys = new List<string>();
         }
     }
 }
