@@ -380,6 +380,7 @@
             this.buttonAPlay.TabIndex = 3;
             this.buttonAPlay.Text = "▶ 再生";
             this.buttonAPlay.UseVisualStyleBackColor = true;
+            this.buttonAPlay.Click += new System.EventHandler(this.buttonAPlay_Click);
             // 
             // labelAPath
             // 

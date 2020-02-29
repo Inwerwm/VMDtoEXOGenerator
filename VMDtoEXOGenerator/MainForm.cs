@@ -1,4 +1,5 @@
 ﻿using AviutlExEditObject;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,6 @@ namespace VMDtoEXOGenerator
     public partial class MainForm : Form
     {
         VocaloidMotionData vmd;
-        ExEditObjectData exo;
 
         List<(string Name, bool Checked)> Key;
         List<ObjectData> ObjectList;
@@ -27,6 +27,7 @@ namespace VMDtoEXOGenerator
 
             canChangeTab = false;
             skipCheckListChange = false;
+
             // バージョン表記
             labelVersion.Text = "Version 1.0";
         }
@@ -164,6 +165,7 @@ namespace VMDtoEXOGenerator
                     break;
             }
             SetCheckedKey(id);
+            SetPlayButtonText(id);
             canChangeTab = false;
         }
 
@@ -265,6 +267,21 @@ namespace VMDtoEXOGenerator
                 ObjectList[id].Keys.Remove(checkedListBoxKey.Items[e.Index].ToString());
             }
         }
+
+        private void buttonAPlay_Click(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            ObjectList[id].PlayAudio(delegate
+            {
+                SetPlayButtonText(id);
+            });
+            SetPlayButtonText(id);
+        }
+
+        private void SetPlayButtonText(int id)
+        {
+            buttonAPlay.Text = ObjectList[id].isPlaying() ? "■ 停止" : "▶ 再生";
+        }
     }
 
     public enum ObjectType
@@ -277,9 +294,20 @@ namespace VMDtoEXOGenerator
     {
         public string Path { get; set; }
         public ObjectType Type { get; set; }
+        /// <summary>
+        /// 30fps
+        /// </summary>
+        public uint Length { get; set; }
+        /// <summary>
+        /// 30fps
+        /// </summary>
         public int Offset { get; set; }
         public ExEditObject ExObject { get; set; }
         public List<string> Keys { get; private set; }
+
+        private AudioFileReader Audio;
+        private static AudioFileReader playingAudio;
+        public static WaveOut Player;
 
         public ObjectData(string path, ObjectType type, ExEditObject obj, int offset = 0)
         {
@@ -288,6 +316,67 @@ namespace VMDtoEXOGenerator
             Offset = offset;
             ExObject = obj;
             Keys = new List<string>();
+
+            switch (Type)
+            {
+                case ObjectType.Audio:
+                    Audio = new AudioFileReader(Path);
+                    Length = (uint)Math.Ceiling(Audio.TotalTime.TotalSeconds * 30);
+                    Player = new WaveOut();
+                    break;
+                case ObjectType.Media:
+                case ObjectType.Filter:
+                default:
+                    Length = 18;
+                    break;
+            }
+        }
+
+        public void PlayAudio(EventHandler<StoppedEventArgs> handler)
+        {
+            if (Type != ObjectType.Audio)
+                return;
+
+            if (Player.PlaybackState != PlaybackState.Playing)
+            {
+                Audio.Position = 0;
+                Player.Init(Audio);
+                Player.Play();
+                playingAudio = Audio;
+                Player.PlaybackStopped += handler;
+            }
+            else if (playingAudio != Audio)
+            {
+                Player.Dispose();
+                Player = new WaveOut();
+                Audio.Position = 0;
+                Player.Init(Audio);
+                Player.Play();
+                playingAudio = Audio;
+                Player.PlaybackStopped += handler;
+            }
+            else
+            {
+                Player.Stop();
+                playingAudio = null;
+                Player.PlaybackStopped -= handler;
+            }
+        }
+
+        public void StopAudio()
+        {
+            if (Type != ObjectType.Audio)
+                return;
+            Player.Stop();
+        }
+
+        public bool isPlaying()
+        {
+            if (Type != ObjectType.Audio)
+                return false;
+
+
+            return playingAudio == Audio && Player.PlaybackState == PlaybackState.Playing;
         }
     }
 }
