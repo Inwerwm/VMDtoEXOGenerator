@@ -39,18 +39,11 @@ namespace VMDtoEXOGenerator
 
         private void OpenVMD(string[] path)
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(path[0], FileMode.Open)))
+            foreach (var s in path)
             {
-                vmd.Read(reader);
-            }
-            if (path.Length > 1)
-            {
-                foreach (var s in path.Skip(1))
+                using (BinaryReader reader = new BinaryReader(File.Open(s, FileMode.Open)))
                 {
-                    using (BinaryReader reader = new BinaryReader(File.Open(s, FileMode.Open)))
-                    {
-                        vmd.Merge(new VocaloidMotionData(reader));
-                    }
+                    vmd.Merge(new VocaloidMotionData(reader));
                 }
             }
             //同名同時フレームは削除
@@ -176,7 +169,7 @@ namespace VMDtoEXOGenerator
 
         public void SetCheckedKey(int id)
         {
-            if (checkedListBoxKey.Items.Count==0)
+            if (checkedListBoxKey.Items.Count == 0)
                 return;
 
             skipCheckListChange = true;
@@ -263,7 +256,7 @@ namespace VMDtoEXOGenerator
             if (id == -1)
                 return;
 
-            if (e.NewValue==CheckState.Checked)
+            if (e.NewValue == CheckState.Checked)
             {
                 ObjectList[id].Keys.Add(checkedListBoxKey.Items[e.Index].ToString());
             }
