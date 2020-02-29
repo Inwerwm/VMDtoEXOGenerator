@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace VmdIO
@@ -32,7 +33,22 @@ namespace VmdIO
             ModelName = "";
             MotionFrames = new List<VmdMotionFrameData>();
             MorphFrames = new List<VmdMorphFrameData>();
+            CameraFrames = new List<VmdCameraFrameData>();
+            LightFrames = new List<VmdLightFrameData>();
+            ShadowFrames = new List<VmdShadowFrameData>();
             PropertyFrames = new List<VmdPropertyFrameData>();
+        }
+
+        public VocaloidMotionData(BinaryReader reader)
+        {
+            ModelName = "";
+            MotionFrames = new List<VmdMotionFrameData>();
+            MorphFrames = new List<VmdMorphFrameData>();
+            CameraFrames = new List<VmdCameraFrameData>();
+            LightFrames = new List<VmdLightFrameData>();
+            ShadowFrames = new List<VmdShadowFrameData>();
+            PropertyFrames = new List<VmdPropertyFrameData>();
+            Read(reader);
         }
 
         public void Clear()
@@ -44,17 +60,31 @@ namespace VmdIO
             PropertyFrames = new List<VmdPropertyFrameData>();
         }
 
+        public void Merge(VocaloidMotionData data)
+        {
+            if (data.MotionFrames != null)
+                MotionFrames.AddRange(data.MotionFrames);
+            if (data.MorphFrames != null)
+                MorphFrames.AddRange(data.MorphFrames);
+            if (data.CameraFrames != null)
+                CameraFrames.AddRange(data.CameraFrames);
+            if (data.LightFrames != null)
+                LightFrames.AddRange(data.LightFrames);
+            if (data.ShadowFrames != null)
+                ShadowFrames.AddRange(data.ShadowFrames);
+            if (data.PropertyFrames != null)
+                PropertyFrames.AddRange(data.PropertyFrames);
+        }
+
         public void Write(BinaryWriter writer)
         {
             writer.WriteTextWithFixedLength(header, HEADER_LENGTH);
             writer.WriteTextWithFixedLength(ModelName, MODEL_NAME_LENGTH);
             WriteVmdFrameData(MotionFrames, writer);
             WriteVmdFrameData(MorphFrames, writer);
-            /*
             WriteVmdFrameData(CameraFrames, writer);
             WriteVmdFrameData(LightFrames, writer);
             WriteVmdFrameData(ShadowFrames, writer);
-            */
             WriteVmdFrameData(PropertyFrames, writer);
         }
 
@@ -121,6 +151,46 @@ namespace VmdIO
             {
                 PropertyFrames.Add(new VmdPropertyFrameData(reader));
             }
+        }
+
+        public enum GetKeyIgnoring
+        {
+            ZeroValue,
+            FirstFrame,
+            Motion,
+            Morph
+        }
+        public List<string> GetKeyNames(params GetKeyIgnoring[] opt)
+        {
+            var names = new List<string>();
+            IEnumerable<IGrouping<string, VmdMotionFrameData>> motions = MotionFrames.GroupBy(f => f.Name.Trim('\0')); ;
+            IEnumerable<IGrouping<string, VmdMorphFrameData>> morphs = MorphFrames.GroupBy(f => f.Name.Trim('\0'));
+
+            if (opt.Contains(GetKeyIgnoring.ZeroValue))
+            {
+                //motions = MotionFrames.Where(f => (f.Pos != Vector3.Zero) || (f.Rot != Quaternion.Identity)).GroupBy(f => f.Name.Trim('\0'));
+                //morphs = MorphFrames.Where(f => f.Weigth!=0).GroupBy(f => f.Name.Trim('\0'));
+                motions = motions.Where(g => g.Where(f => (f.Pos != Vector3.Zero) || (f.Rot != Quaternion.Identity)).Count() != 0);
+                morphs = morphs.Where(g => g.Where(f => f.Weigth != 0).Count() != 0);
+            }
+
+            if (opt.Contains(GetKeyIgnoring.FirstFrame))
+            {
+                //フレームタイムが0でないvmdを持つグループのみを抽出
+                motions = motions.Where(g => g.Where(f => f.FrameTime != 0).Count() != 0);
+                morphs = morphs.Where(g => g.Where(f => f.FrameTime != 0).Count() != 0);
+            }
+
+            if (!opt.Contains(GetKeyIgnoring.Motion))
+            {
+                names.AddRange(motions.Select(g => g.Key));
+                names.Sort(MMDUtilities.BoneNameComparer.Compare);
+            }
+
+            if (!opt.Contains(GetKeyIgnoring.Morph))
+                names.AddRange(morphs.Select(g => g.Key));
+
+            return names;
         }
     }
 
