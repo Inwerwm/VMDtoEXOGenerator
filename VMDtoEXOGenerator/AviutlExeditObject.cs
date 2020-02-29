@@ -96,7 +96,7 @@ namespace AviutlExEditObject
                 output += "[" + index.ToString() + "." + i.ToString() + "]" + "\r\n";
                 output += Property[i].ToString();
             }
-            
+
             return output;
         }
     }
@@ -104,17 +104,29 @@ namespace AviutlExEditObject
     interface IExObjectType
     {
         string ToString();
+
+        /// <summary>
+        /// 最終手段 なるべく使うべからず
+        /// </summary>
+        /// <returns>プロパティのobjectにキャストされた値が実装順に並んだList</returns>
+        List<object> ToList();
+
+        /// <summary>
+        /// 最終手段 できるならコンストラクタでの上書きを使うこと
+        /// </summary>
+        /// <param name="list">プロパティの値を実装順に並べたList</param>
+        void SetBy(List<object> list);
     }
 
-    class ExoSound : IExObjectType
+    class ExoAudio : IExObjectType
     {
-        public int Start { get; set; }
+        public float Start { get; set; }
         public float Speed { get; set; }
         public bool Loop { get; set; }
         public bool Linkage { get; set; }
         public string FilePath { get; set; }
 
-        public ExoSound(string filePath, int start = 0, float speed = 100, bool loop = false, bool linkage = false)
+        public ExoAudio(string filePath, float start = 0, float speed = 100, bool loop = false, bool linkage = false)
         {
             Start = start;
             Speed = speed;
@@ -133,6 +145,20 @@ namespace AviutlExEditObject
             output += "動画ファイルと連携=" + (Linkage ? 1 : 0).ToString() + "\r\n";
             output += "file=" + FilePath + "\r\n";
             return output;
+        }
+
+        public List<object> ToList()
+        {
+            return new List<object> { Start, Speed, Loop, Linkage, FilePath };
+        }
+
+        public void SetBy(List<object> list)
+        {
+            Start = (float)list[0];
+            Speed = (float)list[1];
+            Loop = (bool)list[2];
+            Linkage = (bool)list[3];
+            FilePath = (string)list[4];
         }
     }
 
@@ -154,6 +180,17 @@ namespace AviutlExEditObject
             output += "音量=" + Volume.ToString() + "\r\n";
             output += "左右=" + Side.ToString() + "\r\n";
             return output;
+        }
+
+        public List<object> ToList()
+        {
+            return new List<object> { Volume, Side };
+        }
+
+        public void SetBy(List<object> list)
+        {
+            Volume = (float)list[0];
+            Side = (float)list[1];
         }
     }
 }

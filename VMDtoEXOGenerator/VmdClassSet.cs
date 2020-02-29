@@ -11,7 +11,12 @@ namespace VmdIO
         void Write(BinaryWriter writer);
     }
 
-    public struct VmdMotionFrameData : IVmdFrameData
+    public interface IVmdModelFrameData : IVmdFrameData
+    {
+        string Name { get; set; }
+    }
+
+    public struct VmdMotionFrameData : IVmdModelFrameData
     {
         public string Name { get; set; }
         public uint FrameTime { get; set; }
@@ -187,7 +192,7 @@ namespace VmdIO
         }
     }
 
-    public struct VmdMorphFrameData : IVmdFrameData
+    public struct VmdMorphFrameData : IVmdModelFrameData
     {
         public string Name { get; set; }
         public uint FrameTime { get; set; }
@@ -394,5 +399,43 @@ namespace VmdIO
             }
         }
 
+    }
+
+    class VmdMotionFrameDataEqualityComparer : IEqualityComparer<VmdMotionFrameData>
+    {
+        public bool Equals(VmdMotionFrameData x, VmdMotionFrameData y)
+        {
+            if (x.Name == y.Name && x.FrameTime == y.FrameTime)
+                return true;
+            else
+                return false;
+        }
+
+        public int GetHashCode(VmdMotionFrameData obj)
+        {
+            var hashCode = -1058630834;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(obj.Name);
+            hashCode = hashCode * -1521134295 + obj.FrameTime.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    class VmdMorphFrameDataEqualityComparer : IEqualityComparer<VmdMorphFrameData>
+    {
+        public bool Equals(VmdMorphFrameData x, VmdMorphFrameData y)
+        {
+            if (x.Name == y.Name && x.FrameTime == y.FrameTime)
+                return true;
+            else
+                return false;
+        }
+
+        public int GetHashCode(VmdMorphFrameData obj)
+        {
+            var hashCode = -1058630834;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(obj.Name);
+            hashCode = hashCode * -1521134295 + obj.FrameTime.GetHashCode();
+            return hashCode;
+        }
     }
 }

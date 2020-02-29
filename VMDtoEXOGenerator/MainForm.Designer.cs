@@ -50,6 +50,7 @@
             this.tabPageDefault = new System.Windows.Forms.TabPage();
             this.labelObj = new System.Windows.Forms.Label();
             this.tabPageAudio = new System.Windows.Forms.TabPage();
+            this.buttonAPlay = new System.Windows.Forms.Button();
             this.labelAPath = new System.Windows.Forms.Label();
             this.numericALayer = new System.Windows.Forms.NumericUpDown();
             this.labelALayer = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@
             this.labelAPlaySpeed = new System.Windows.Forms.Label();
             this.labelAPlayPos = new System.Windows.Forms.Label();
             this.labelAStartOffset = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxAFilePath = new System.Windows.Forms.TextBox();
             this.tabPageAliasM = new System.Windows.Forms.TabPage();
             this.dataGridMedia = new System.Windows.Forms.DataGridView();
             this.tabPageAliasF = new System.Windows.Forms.TabPage();
@@ -123,6 +124,7 @@
             this.listBoxSetee.Name = "listBoxSetee";
             this.listBoxSetee.Size = new System.Drawing.Size(155, 361);
             this.listBoxSetee.TabIndex = 4;
+            this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
             // checkedListBoxKey
             // 
@@ -307,6 +309,7 @@
             this.buttonAddObject.TabIndex = 1;
             this.buttonAddObject.Text = "追加";
             this.buttonAddObject.UseVisualStyleBackColor = true;
+            this.buttonAddObject.Click += new System.EventHandler(this.buttonAddObject_Click);
             // 
             // tabControlProperty
             // 
@@ -346,6 +349,7 @@
             // tabPageAudio
             // 
             this.tabPageAudio.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageAudio.Controls.Add(this.buttonAPlay);
             this.tabPageAudio.Controls.Add(this.labelAPath);
             this.tabPageAudio.Controls.Add(this.numericALayer);
             this.tabPageAudio.Controls.Add(this.labelALayer);
@@ -359,13 +363,22 @@
             this.tabPageAudio.Controls.Add(this.labelAPlaySpeed);
             this.tabPageAudio.Controls.Add(this.labelAPlayPos);
             this.tabPageAudio.Controls.Add(this.labelAStartOffset);
-            this.tabPageAudio.Controls.Add(this.textBox1);
+            this.tabPageAudio.Controls.Add(this.textBoxAFilePath);
             this.tabPageAudio.Location = new System.Drawing.Point(4, 30);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageAudio.Size = new System.Drawing.Size(314, 407);
             this.tabPageAudio.TabIndex = 0;
             this.tabPageAudio.Text = "音声";
+            // 
+            // buttonAPlay
+            // 
+            this.buttonAPlay.Location = new System.Drawing.Point(10, 367);
+            this.buttonAPlay.Name = "buttonAPlay";
+            this.buttonAPlay.Size = new System.Drawing.Size(293, 34);
+            this.buttonAPlay.TabIndex = 3;
+            this.buttonAPlay.Text = "▶ 再生";
+            this.buttonAPlay.UseVisualStyleBackColor = true;
             // 
             // labelAPath
             // 
@@ -539,15 +552,15 @@
             this.labelAStartOffset.TabIndex = 0;
             this.labelAStartOffset.Text = "設置フレームオフセット";
             // 
-            // textBox1
+            // textBoxAFilePath
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxAFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(6, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(297, 29);
-            this.textBox1.TabIndex = 0;
+            this.textBoxAFilePath.Location = new System.Drawing.Point(6, 27);
+            this.textBoxAFilePath.Name = "textBoxAFilePath";
+            this.textBoxAFilePath.ReadOnly = true;
+            this.textBoxAFilePath.Size = new System.Drawing.Size(297, 29);
+            this.textBoxAFilePath.TabIndex = 0;
             // 
             // tabPageAliasM
             // 
@@ -735,7 +748,7 @@
         private System.Windows.Forms.Label labelAPlaySpeed;
         private System.Windows.Forms.Label labelAPlayPos;
         private System.Windows.Forms.Label labelAStartOffset;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxAFilePath;
         private System.Windows.Forms.DataGridView dataGridMedia;
         private System.Windows.Forms.DataGridView dataGridViewFilter;
         private System.Windows.Forms.TabPage tabPageDefault;
@@ -746,6 +759,7 @@
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Button buttonAllF;
         private System.Windows.Forms.Button buttonAllInv;
+        private System.Windows.Forms.Button buttonAPlay;
     }
 }
 
