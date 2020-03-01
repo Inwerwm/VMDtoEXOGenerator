@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.buttonOpenVMD = new System.Windows.Forms.Button();
             this.labelObject = new System.Windows.Forms.Label();
             this.listBoxSetee = new System.Windows.Forms.ListBox();
@@ -75,14 +74,12 @@
             this.buttonAllF = new System.Windows.Forms.Button();
             this.buttonAllInv = new System.Windows.Forms.Button();
             this.checkBoxRandomAudio = new System.Windows.Forms.CheckBox();
-            this.groupBoxSettings = new System.Windows.Forms.GroupBox();
-            this.groupBoxDupSetting = new System.Windows.Forms.GroupBox();
-            this.radioButtonDupCut = new System.Windows.Forms.RadioButton();
-            this.radioButtonDupLayer = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBoxRandomAudio = new System.Windows.Forms.GroupBox();
+            this.labelRandomAudio = new System.Windows.Forms.Label();
+            this.labelHeaderDesc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).BeginInit();
             this.groupBoxExoHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).BeginInit();
@@ -99,11 +96,10 @@
             this.tabPageAliasF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilter)).BeginInit();
             this.groupBoxUsage.SuspendLayout();
-            this.groupBoxSettings.SuspendLayout();
-            this.groupBoxDupSetting.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.groupBoxRandomAudio.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOpenVMD
@@ -113,7 +109,7 @@
             this.buttonOpenVMD.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.buttonOpenVMD.Location = new System.Drawing.Point(16, 180);
             this.buttonOpenVMD.Name = "buttonOpenVMD";
-            this.buttonOpenVMD.Size = new System.Drawing.Size(874, 61);
+            this.buttonOpenVMD.Size = new System.Drawing.Size(858, 61);
             this.buttonOpenVMD.TabIndex = 1;
             this.buttonOpenVMD.Text = "VMDを開く";
             this.buttonOpenVMD.UseVisualStyleBackColor = true;
@@ -137,7 +133,7 @@
             this.listBoxSetee.ItemHeight = 21;
             this.listBoxSetee.Location = new System.Drawing.Point(3, 70);
             this.listBoxSetee.Name = "listBoxSetee";
-            this.listBoxSetee.Size = new System.Drawing.Size(261, 319);
+            this.listBoxSetee.Size = new System.Drawing.Size(253, 319);
             this.listBoxSetee.TabIndex = 4;
             this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
@@ -151,24 +147,23 @@
             this.checkedListBoxKey.FormattingEnabled = true;
             this.checkedListBoxKey.Location = new System.Drawing.Point(3, 72);
             this.checkedListBoxKey.Name = "checkedListBoxKey";
-            this.checkedListBoxKey.Size = new System.Drawing.Size(262, 316);
+            this.checkedListBoxKey.Size = new System.Drawing.Size(254, 316);
             this.checkedListBoxKey.TabIndex = 5;
             this.checkedListBoxKey.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxKey_ItemCheck);
             // 
             // labelKey
             // 
             this.labelKey.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.labelKey, 2);
             this.labelKey.Location = new System.Drawing.Point(3, 0);
             this.labelKey.Name = "labelKey";
-            this.labelKey.Size = new System.Drawing.Size(108, 20);
+            this.labelKey.Size = new System.Drawing.Size(108, 21);
             this.labelKey.TabIndex = 6;
             this.labelKey.Text = "割当キーフレーム";
             // 
             // labelFPS
             // 
             this.labelFPS.AutoSize = true;
-            this.labelFPS.Location = new System.Drawing.Point(6, 79);
+            this.labelFPS.Location = new System.Drawing.Point(6, 24);
             this.labelFPS.Name = "labelFPS";
             this.labelFPS.Size = new System.Drawing.Size(68, 21);
             this.labelFPS.TabIndex = 7;
@@ -177,7 +172,7 @@
             // numericFPS
             // 
             this.numericFPS.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.numericFPS.Location = new System.Drawing.Point(10, 104);
+            this.numericFPS.Location = new System.Drawing.Point(10, 49);
             this.numericFPS.Maximum = new decimal(new int[] {
             120,
             0,
@@ -201,6 +196,8 @@
             // 
             this.groupBoxExoHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxExoHeader.Controls.Add(this.groupBoxRandomAudio);
+            this.groupBoxExoHeader.Controls.Add(this.checkBoxRandomAudio);
             this.groupBoxExoHeader.Controls.Add(this.labelHeaderNote);
             this.groupBoxExoHeader.Controls.Add(this.labelWidth);
             this.groupBoxExoHeader.Controls.Add(this.labelHeight);
@@ -214,25 +211,25 @@
             this.groupBoxExoHeader.Controls.Add(this.textBoxAudioRate);
             this.groupBoxExoHeader.Location = new System.Drawing.Point(16, 247);
             this.groupBoxExoHeader.Name = "groupBoxExoHeader";
-            this.groupBoxExoHeader.Size = new System.Drawing.Size(874, 141);
+            this.groupBoxExoHeader.Size = new System.Drawing.Size(858, 141);
             this.groupBoxExoHeader.TabIndex = 9;
             this.groupBoxExoHeader.TabStop = false;
-            this.groupBoxExoHeader.Text = "EXOヘッダー";
+            this.groupBoxExoHeader.Text = "設定";
             // 
             // labelHeaderNote
             // 
             this.labelHeaderNote.AutoSize = true;
-            this.labelHeaderNote.Location = new System.Drawing.Point(6, 26);
+            this.labelHeaderNote.Location = new System.Drawing.Point(6, 89);
             this.labelHeaderNote.Name = "labelHeaderNote";
-            this.labelHeaderNote.Size = new System.Drawing.Size(291, 42);
+            this.labelHeaderNote.Size = new System.Drawing.Size(220, 42);
             this.labelHeaderNote.TabIndex = 9;
-            this.labelHeaderNote.Text = "動画FPSは設置フレーム計算のため必須\r\nそれ以外は新規読み込み時以外無視される";
+            this.labelHeaderNote.Text = "合わせたい動画のFPSを設定する\r\n設置フレーム計算に必要";
             // 
             // labelWidth
             // 
             this.labelWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelWidth.AutoSize = true;
-            this.labelWidth.Location = new System.Drawing.Point(643, 27);
+            this.labelWidth.Location = new System.Drawing.Point(739, 26);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(26, 21);
             this.labelWidth.TabIndex = 7;
@@ -242,7 +239,7 @@
             // 
             this.labelHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(744, 27);
+            this.labelHeight.Location = new System.Drawing.Point(826, 26);
             this.labelHeight.Name = "labelHeight";
             this.labelHeight.Size = new System.Drawing.Size(26, 21);
             this.labelHeight.TabIndex = 7;
@@ -252,7 +249,7 @@
             // 
             this.labelAudioRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAudioRate.AutoSize = true;
-            this.labelAudioRate.Location = new System.Drawing.Point(643, 81);
+            this.labelAudioRate.Location = new System.Drawing.Point(679, 80);
             this.labelAudioRate.Name = "labelAudioRate";
             this.labelAudioRate.Size = new System.Drawing.Size(107, 21);
             this.labelAudioRate.TabIndex = 7;
@@ -262,17 +259,17 @@
             // 
             this.labelAudioCh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAudioCh.AutoSize = true;
-            this.labelAudioCh.Location = new System.Drawing.Point(744, 81);
+            this.labelAudioCh.Location = new System.Drawing.Point(788, 80);
             this.labelAudioCh.Name = "labelAudioCh";
-            this.labelAudioCh.Size = new System.Drawing.Size(103, 21);
+            this.labelAudioCh.Size = new System.Drawing.Size(58, 21);
             this.labelAudioCh.TabIndex = 7;
-            this.labelAudioCh.Text = "音声チャンネル";
+            this.labelAudioCh.Text = "音声ch";
             // 
             // numericAudioCh
             // 
             this.numericAudioCh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numericAudioCh.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.numericAudioCh.Location = new System.Drawing.Point(748, 104);
+            this.numericAudioCh.Location = new System.Drawing.Point(792, 102);
             this.numericAudioCh.Maximum = new decimal(new int[] {
             2,
             0,
@@ -284,7 +281,7 @@
             0,
             0});
             this.numericAudioCh.Name = "numericAudioCh";
-            this.numericAudioCh.Size = new System.Drawing.Size(120, 29);
+            this.numericAudioCh.Size = new System.Drawing.Size(60, 29);
             this.numericAudioCh.TabIndex = 8;
             this.numericAudioCh.Value = new decimal(new int[] {
             2,
@@ -295,27 +292,27 @@
             // textBoxWidth
             // 
             this.textBoxWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxWidth.Location = new System.Drawing.Point(647, 49);
+            this.textBoxWidth.Location = new System.Drawing.Point(683, 50);
             this.textBoxWidth.Name = "textBoxWidth";
-            this.textBoxWidth.Size = new System.Drawing.Size(95, 29);
+            this.textBoxWidth.Size = new System.Drawing.Size(82, 29);
             this.textBoxWidth.TabIndex = 0;
             this.textBoxWidth.Text = "1920";
             // 
             // textBoxHeight
             // 
             this.textBoxHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxHeight.Location = new System.Drawing.Point(748, 49);
+            this.textBoxHeight.Location = new System.Drawing.Point(770, 49);
             this.textBoxHeight.Name = "textBoxHeight";
-            this.textBoxHeight.Size = new System.Drawing.Size(104, 29);
+            this.textBoxHeight.Size = new System.Drawing.Size(82, 29);
             this.textBoxHeight.TabIndex = 0;
             this.textBoxHeight.Text = "1080";
             // 
             // textBoxAudioRate
             // 
             this.textBoxAudioRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAudioRate.Location = new System.Drawing.Point(647, 104);
+            this.textBoxAudioRate.Location = new System.Drawing.Point(683, 102);
             this.textBoxAudioRate.Name = "textBoxAudioRate";
-            this.textBoxAudioRate.Size = new System.Drawing.Size(95, 29);
+            this.textBoxAudioRate.Size = new System.Drawing.Size(103, 29);
             this.textBoxAudioRate.TabIndex = 0;
             this.textBoxAudioRate.Text = "44100";
             // 
@@ -326,7 +323,7 @@
             this.buttonAddObject.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonAddObject.Location = new System.Drawing.Point(3, 24);
             this.buttonAddObject.Name = "buttonAddObject";
-            this.buttonAddObject.Size = new System.Drawing.Size(261, 40);
+            this.buttonAddObject.Size = new System.Drawing.Size(253, 40);
             this.buttonAddObject.TabIndex = 1;
             this.buttonAddObject.Text = "追加";
             this.buttonAddObject.UseVisualStyleBackColor = true;
@@ -341,10 +338,10 @@
             this.tabControlProperty.Controls.Add(this.tabPageAudio);
             this.tabControlProperty.Controls.Add(this.tabPageAliasM);
             this.tabControlProperty.Controls.Add(this.tabPageAliasF);
-            this.tabControlProperty.Location = new System.Drawing.Point(276, 3);
+            this.tabControlProperty.Location = new System.Drawing.Point(268, 3);
             this.tabControlProperty.Name = "tabControlProperty";
             this.tabControlProperty.SelectedIndex = 0;
-            this.tabControlProperty.Size = new System.Drawing.Size(321, 404);
+            this.tabControlProperty.Size = new System.Drawing.Size(321, 393);
             this.tabControlProperty.TabIndex = 0;
             this.tabControlProperty.TabStop = false;
             this.tabControlProperty.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControlProperty_Selecting);
@@ -356,7 +353,7 @@
             this.tabPageDefault.Location = new System.Drawing.Point(4, 30);
             this.tabPageDefault.Name = "tabPageDefault";
             this.tabPageDefault.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefault.Size = new System.Drawing.Size(313, 370);
+            this.tabPageDefault.Size = new System.Drawing.Size(313, 359);
             this.tabPageDefault.TabIndex = 3;
             // 
             // labelObj
@@ -388,7 +385,7 @@
             this.tabPageAudio.Location = new System.Drawing.Point(4, 30);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(313, 370);
+            this.tabPageAudio.Size = new System.Drawing.Size(313, 362);
             this.tabPageAudio.TabIndex = 0;
             this.tabPageAudio.Text = "音声";
             // 
@@ -396,7 +393,7 @@
             // 
             this.buttonAPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAPlay.Location = new System.Drawing.Point(10, 333);
+            this.buttonAPlay.Location = new System.Drawing.Point(10, 325);
             this.buttonAPlay.Name = "buttonAPlay";
             this.buttonAPlay.Size = new System.Drawing.Size(293, 34);
             this.buttonAPlay.TabIndex = 3;
@@ -570,7 +567,7 @@
             this.tabPageAliasM.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasM.Name = "tabPageAliasM";
             this.tabPageAliasM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasM.Size = new System.Drawing.Size(313, 370);
+            this.tabPageAliasM.Size = new System.Drawing.Size(313, 362);
             this.tabPageAliasM.TabIndex = 1;
             this.tabPageAliasM.Text = "メディア";
             // 
@@ -590,7 +587,7 @@
             this.tabPageAliasF.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasF.Name = "tabPageAliasF";
             this.tabPageAliasF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasF.Size = new System.Drawing.Size(313, 370);
+            this.tabPageAliasF.Size = new System.Drawing.Size(313, 362);
             this.tabPageAliasF.TabIndex = 2;
             this.tabPageAliasF.Text = "フィルタ";
             // 
@@ -608,9 +605,9 @@
             this.buttonGen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGen.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.buttonGen.Location = new System.Drawing.Point(16, 890);
+            this.buttonGen.Location = new System.Drawing.Point(16, 800);
             this.buttonGen.Name = "buttonGen";
-            this.buttonGen.Size = new System.Drawing.Size(874, 57);
+            this.buttonGen.Size = new System.Drawing.Size(858, 57);
             this.buttonGen.TabIndex = 10;
             this.buttonGen.Text = "EXOを生成";
             this.buttonGen.UseVisualStyleBackColor = true;
@@ -630,11 +627,12 @@
             // 
             this.groupBoxUsage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxUsage.Controls.Add(this.labelHeaderDesc);
             this.groupBoxUsage.Controls.Add(this.labelVersion);
             this.groupBoxUsage.Controls.Add(this.labelUsage);
             this.groupBoxUsage.Location = new System.Drawing.Point(16, 12);
             this.groupBoxUsage.Name = "groupBoxUsage";
-            this.groupBoxUsage.Size = new System.Drawing.Size(874, 153);
+            this.groupBoxUsage.Size = new System.Drawing.Size(858, 153);
             this.groupBoxUsage.TabIndex = 12;
             this.groupBoxUsage.TabStop = false;
             this.groupBoxUsage.Text = "使い方";
@@ -643,7 +641,7 @@
             // 
             this.labelVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(781, 129);
+            this.labelVersion.Location = new System.Drawing.Point(765, 129);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(87, 21);
             this.labelVersion.TabIndex = 12;
@@ -655,9 +653,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAllF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAllF.Location = new System.Drawing.Point(3, 23);
+            this.buttonAllF.Location = new System.Drawing.Point(3, 26);
             this.buttonAllF.Name = "buttonAllF";
-            this.buttonAllF.Size = new System.Drawing.Size(128, 43);
+            this.buttonAllF.Size = new System.Drawing.Size(124, 40);
             this.buttonAllF.TabIndex = 13;
             this.buttonAllF.Text = "全非選";
             this.buttonAllF.UseVisualStyleBackColor = true;
@@ -669,9 +667,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAllInv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAllInv.Location = new System.Drawing.Point(137, 23);
+            this.buttonAllInv.Location = new System.Drawing.Point(133, 26);
             this.buttonAllInv.Name = "buttonAllInv";
-            this.buttonAllInv.Size = new System.Drawing.Size(128, 43);
+            this.buttonAllInv.Size = new System.Drawing.Size(124, 40);
             this.buttonAllInv.TabIndex = 13;
             this.buttonAllInv.Text = "選反転";
             this.buttonAllInv.UseVisualStyleBackColor = true;
@@ -682,62 +680,12 @@
             this.checkBoxRandomAudio.AutoSize = true;
             this.checkBoxRandomAudio.Checked = true;
             this.checkBoxRandomAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxRandomAudio.Location = new System.Drawing.Point(6, 48);
+            this.checkBoxRandomAudio.Location = new System.Drawing.Point(150, 51);
             this.checkBoxRandomAudio.Name = "checkBoxRandomAudio";
             this.checkBoxRandomAudio.Size = new System.Drawing.Size(147, 25);
             this.checkBoxRandomAudio.TabIndex = 14;
             this.checkBoxRandomAudio.Text = "同キー音声ランダム";
-            this.toolTipHelp.SetToolTip(this.checkBoxRandomAudio, "同じキーフレームに複数の音声が割り当てられていた場合\r\n設置毎にランダムに選んだ1つだけを設置します\r\nOFFの場合は割り当てられている全ての音声が設置され\r\n一" +
-        "斉に再生されることになります");
             this.checkBoxRandomAudio.UseVisualStyleBackColor = true;
-            // 
-            // groupBoxSettings
-            // 
-            this.groupBoxSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxSettings.Controls.Add(this.groupBoxDupSetting);
-            this.groupBoxSettings.Controls.Add(this.checkBoxRandomAudio);
-            this.groupBoxSettings.Location = new System.Drawing.Point(16, 803);
-            this.groupBoxSettings.Name = "groupBoxSettings";
-            this.groupBoxSettings.Size = new System.Drawing.Size(874, 81);
-            this.groupBoxSettings.TabIndex = 14;
-            this.groupBoxSettings.TabStop = false;
-            this.groupBoxSettings.Text = "設定";
-            // 
-            // groupBoxDupSetting
-            // 
-            this.groupBoxDupSetting.Controls.Add(this.radioButtonDupCut);
-            this.groupBoxDupSetting.Controls.Add(this.radioButtonDupLayer);
-            this.groupBoxDupSetting.Location = new System.Drawing.Point(176, 18);
-            this.groupBoxDupSetting.Name = "groupBoxDupSetting";
-            this.groupBoxDupSetting.Size = new System.Drawing.Size(200, 57);
-            this.groupBoxDupSetting.TabIndex = 15;
-            this.groupBoxDupSetting.TabStop = false;
-            this.groupBoxDupSetting.Text = "重複時処理";
-            // 
-            // radioButtonDupCut
-            // 
-            this.radioButtonDupCut.AutoSize = true;
-            this.radioButtonDupCut.Location = new System.Drawing.Point(115, 29);
-            this.radioButtonDupCut.Name = "radioButtonDupCut";
-            this.radioButtonDupCut.Size = new System.Drawing.Size(85, 25);
-            this.radioButtonDupCut.TabIndex = 0;
-            this.radioButtonDupCut.TabStop = true;
-            this.radioButtonDupCut.Text = "割り込み";
-            this.toolTipHelp.SetToolTip(this.radioButtonDupCut, "同キー・同設置オブジェクトが時間的に重複していた場合\r\n既に設置されているオブジェクトを終了させて\r\n新しいオブジェクトを同じレイヤーで開始します");
-            this.radioButtonDupCut.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonDupLayer
-            // 
-            this.radioButtonDupLayer.AutoSize = true;
-            this.radioButtonDupLayer.Location = new System.Drawing.Point(7, 29);
-            this.radioButtonDupLayer.Name = "radioButtonDupLayer";
-            this.radioButtonDupLayer.Size = new System.Drawing.Size(102, 25);
-            this.radioButtonDupLayer.TabIndex = 0;
-            this.radioButtonDupLayer.TabStop = true;
-            this.radioButtonDupLayer.Text = "レイヤー下げ";
-            this.toolTipHelp.SetToolTip(this.radioButtonDupLayer, "同キー・同設置オブジェクトが時間的に重複していた場合\r\nレイヤーを下げることで対応します");
-            this.radioButtonDupLayer.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -755,7 +703,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(874, 410);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(858, 399);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // tableLayoutPanel2
@@ -770,13 +718,13 @@
             this.tableLayoutPanel2.Controls.Add(this.checkedListBoxKey, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.buttonAllF, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.buttonAllInv, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(603, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(595, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(268, 404);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 393);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
             // tableLayoutPanel4
@@ -795,29 +743,52 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(267, 404);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 393);
             this.tableLayoutPanel4.TabIndex = 17;
             // 
-            // toolTipHelp
+            // groupBoxRandomAudio
             // 
-            this.toolTipHelp.AutoPopDelay = 32767;
-            this.toolTipHelp.InitialDelay = 1;
-            this.toolTipHelp.ReshowDelay = 1;
+            this.groupBoxRandomAudio.Controls.Add(this.labelRandomAudio);
+            this.groupBoxRandomAudio.Location = new System.Drawing.Point(303, 19);
+            this.groupBoxRandomAudio.Name = "groupBoxRandomAudio";
+            this.groupBoxRandomAudio.Size = new System.Drawing.Size(368, 122);
+            this.groupBoxRandomAudio.TabIndex = 13;
+            this.groupBoxRandomAudio.TabStop = false;
+            this.groupBoxRandomAudio.Text = "同キー音声ランダムについて";
+            // 
+            // labelRandomAudio
+            // 
+            this.labelRandomAudio.AutoSize = true;
+            this.labelRandomAudio.Location = new System.Drawing.Point(6, 25);
+            this.labelRandomAudio.Name = "labelRandomAudio";
+            this.labelRandomAudio.Size = new System.Drawing.Size(357, 84);
+            this.labelRandomAudio.TabIndex = 0;
+            this.labelRandomAudio.Text = "同じキーフレームに複数の音声が割り当てられていた場合\r\n設置毎にランダムに選んだ1つだけを設置する\r\nOFFの場合は割り当てられている全ての音声が設置され\r\n一斉" +
+    "に再生されることになる";
+            // 
+            // labelHeaderDesc
+            // 
+            this.labelHeaderDesc.AutoSize = true;
+            this.labelHeaderDesc.Location = new System.Drawing.Point(322, 25);
+            this.labelHeaderDesc.Name = "labelHeaderDesc";
+            this.labelHeaderDesc.Size = new System.Drawing.Size(292, 84);
+            this.labelHeaderDesc.TabIndex = 13;
+            this.labelHeaderDesc.Text = "幅・高・音声ビットレート・音声チャンネルは\r\nAviutlの初期読み込みが\r\n生成されたexoファイルの場合のみ意味がある\r\n先にプロジェクトが存在した場合は無視" +
+    "される";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 959);
+            this.ClientSize = new System.Drawing.Size(884, 869);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.groupBoxSettings);
             this.Controls.Add(this.groupBoxUsage);
             this.Controls.Add(this.buttonGen);
             this.Controls.Add(this.groupBoxExoHeader);
             this.Controls.Add(this.buttonOpenVMD);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(732, 898);
+            this.MinimumSize = new System.Drawing.Size(899, 898);
             this.Name = "MainForm";
             this.Text = "VMD to EXO Generator";
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).EndInit();
@@ -840,15 +811,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilter)).EndInit();
             this.groupBoxUsage.ResumeLayout(false);
             this.groupBoxUsage.PerformLayout();
-            this.groupBoxSettings.ResumeLayout(false);
-            this.groupBoxSettings.PerformLayout();
-            this.groupBoxDupSetting.ResumeLayout(false);
-            this.groupBoxDupSetting.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.groupBoxRandomAudio.ResumeLayout(false);
+            this.groupBoxRandomAudio.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -900,14 +869,12 @@
         private System.Windows.Forms.Button buttonAllInv;
         private System.Windows.Forms.Button buttonAPlay;
         private System.Windows.Forms.CheckBox checkBoxRandomAudio;
-        private System.Windows.Forms.GroupBox groupBoxSettings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.ToolTip toolTipHelp;
-        private System.Windows.Forms.GroupBox groupBoxDupSetting;
-        private System.Windows.Forms.RadioButton radioButtonDupCut;
-        private System.Windows.Forms.RadioButton radioButtonDupLayer;
+        private System.Windows.Forms.GroupBox groupBoxRandomAudio;
+        private System.Windows.Forms.Label labelRandomAudio;
+        private System.Windows.Forms.Label labelHeaderDesc;
     }
 }
 

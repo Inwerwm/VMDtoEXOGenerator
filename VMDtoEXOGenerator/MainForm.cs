@@ -300,14 +300,21 @@ namespace VMDtoEXOGenerator
             //音声オブジェクトの配置
             if (checkBoxRandomAudio.Checked)
             {
+                var rnd = new Random();
                 //同キー音声ランダム化ON
-                var Keys = AudioObjects.Select(o => o.Keys).SelectMany(s => s).ToList();
-                Keys.Distinct();
-
                 for (int i = 0; i < checkedListBoxKey.Items.Count; i++)
                 {
-                    var AudioObjectsPerKey = AudioObjects.Where(o => o.Keys.Contains(checkedListBoxKey.Items[i].ToString())).ToList();
-
+                    var key = checkedListBoxKey.Items[i].ToString();
+                    var AudioObjectsPerKey = AudioObjects.Where(o => o.Keys.Contains(key)).ToList();
+                    if (AudioObjectsPerKey.Any())
+                    {
+                        var vmdFrames = GetBasisVmdFrames(key);
+                        foreach (var f in vmdFrames)
+                        {
+                            var o = AudioObjectsPerKey[rnd.Next(0, AudioObjectsPerKey.Count)];
+                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
+                        }
+                    }
                 }
             }
             else
