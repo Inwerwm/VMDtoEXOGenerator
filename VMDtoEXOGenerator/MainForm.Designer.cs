@@ -35,7 +35,7 @@
             this.labelKey = new System.Windows.Forms.Label();
             this.labelFPS = new System.Windows.Forms.Label();
             this.numericFPS = new System.Windows.Forms.NumericUpDown();
-            this.groupBoxHeader = new System.Windows.Forms.GroupBox();
+            this.groupBoxExoHeader = new System.Windows.Forms.GroupBox();
             this.labelHeaderNote = new System.Windows.Forms.Label();
             this.labelWidth = new System.Windows.Forms.Label();
             this.labelHeight = new System.Windows.Forms.Label();
@@ -75,8 +75,13 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.buttonAllF = new System.Windows.Forms.Button();
             this.buttonAllInv = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).BeginInit();
-            this.groupBoxHeader.SuspendLayout();
+            this.groupBoxExoHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).BeginInit();
             this.tabControlProperty.SuspendLayout();
             this.tabPageDefault.SuspendLayout();
@@ -92,15 +97,20 @@
             this.tabPageAliasF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilter)).BeginInit();
             this.groupBoxUsage.SuspendLayout();
+            this.groupBoxSettings.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOpenVMD
             // 
-            this.buttonOpenVMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOpenVMD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOpenVMD.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.buttonOpenVMD.Location = new System.Drawing.Point(16, 180);
             this.buttonOpenVMD.Name = "buttonOpenVMD";
-            this.buttonOpenVMD.Size = new System.Drawing.Size(690, 61);
+            this.buttonOpenVMD.Size = new System.Drawing.Size(874, 61);
             this.buttonOpenVMD.TabIndex = 1;
             this.buttonOpenVMD.Text = "VMDを開く";
             this.buttonOpenVMD.UseVisualStyleBackColor = true;
@@ -109,7 +119,7 @@
             // labelObject
             // 
             this.labelObject.AutoSize = true;
-            this.labelObject.Location = new System.Drawing.Point(12, 399);
+            this.labelObject.Location = new System.Drawing.Point(3, 0);
             this.labelObject.Name = "labelObject";
             this.labelObject.Size = new System.Drawing.Size(112, 21);
             this.labelObject.TabIndex = 3;
@@ -117,33 +127,38 @@
             // 
             // listBoxSetee
             // 
-            this.listBoxSetee.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.listBoxSetee.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxSetee.FormattingEnabled = true;
             this.listBoxSetee.ItemHeight = 21;
-            this.listBoxSetee.Location = new System.Drawing.Point(16, 471);
+            this.listBoxSetee.Location = new System.Drawing.Point(3, 70);
             this.listBoxSetee.Name = "listBoxSetee";
-            this.listBoxSetee.Size = new System.Drawing.Size(155, 361);
+            this.listBoxSetee.Size = new System.Drawing.Size(261, 319);
             this.listBoxSetee.TabIndex = 4;
             this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
             // checkedListBoxKey
             // 
-            this.checkedListBoxKey.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkedListBoxKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxKey.CheckOnClick = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.checkedListBoxKey, 2);
             this.checkedListBoxKey.FormattingEnabled = true;
-            this.checkedListBoxKey.Location = new System.Drawing.Point(493, 471);
+            this.checkedListBoxKey.Location = new System.Drawing.Point(3, 72);
             this.checkedListBoxKey.Name = "checkedListBoxKey";
-            this.checkedListBoxKey.Size = new System.Drawing.Size(213, 364);
+            this.checkedListBoxKey.Size = new System.Drawing.Size(262, 316);
             this.checkedListBoxKey.TabIndex = 5;
             this.checkedListBoxKey.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxKey_ItemCheck);
             // 
             // labelKey
             // 
-            this.labelKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelKey.AutoSize = true;
-            this.labelKey.Location = new System.Drawing.Point(494, 399);
+            this.tableLayoutPanel2.SetColumnSpan(this.labelKey, 2);
+            this.labelKey.Location = new System.Drawing.Point(3, 0);
             this.labelKey.Name = "labelKey";
-            this.labelKey.Size = new System.Drawing.Size(108, 21);
+            this.labelKey.Size = new System.Drawing.Size(108, 20);
             this.labelKey.TabIndex = 6;
             this.labelKey.Text = "割当キーフレーム";
             // 
@@ -179,27 +194,27 @@
             0,
             0});
             // 
-            // groupBoxHeader
+            // groupBoxExoHeader
             // 
-            this.groupBoxHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxExoHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxHeader.Controls.Add(this.labelHeaderNote);
-            this.groupBoxHeader.Controls.Add(this.labelWidth);
-            this.groupBoxHeader.Controls.Add(this.labelHeight);
-            this.groupBoxHeader.Controls.Add(this.labelAudioRate);
-            this.groupBoxHeader.Controls.Add(this.labelAudioCh);
-            this.groupBoxHeader.Controls.Add(this.numericAudioCh);
-            this.groupBoxHeader.Controls.Add(this.textBoxWidth);
-            this.groupBoxHeader.Controls.Add(this.labelFPS);
-            this.groupBoxHeader.Controls.Add(this.textBoxHeight);
-            this.groupBoxHeader.Controls.Add(this.numericFPS);
-            this.groupBoxHeader.Controls.Add(this.textBoxAudioRate);
-            this.groupBoxHeader.Location = new System.Drawing.Point(16, 247);
-            this.groupBoxHeader.Name = "groupBoxHeader";
-            this.groupBoxHeader.Size = new System.Drawing.Size(690, 141);
-            this.groupBoxHeader.TabIndex = 9;
-            this.groupBoxHeader.TabStop = false;
-            this.groupBoxHeader.Text = "EXOヘッダ";
+            this.groupBoxExoHeader.Controls.Add(this.labelHeaderNote);
+            this.groupBoxExoHeader.Controls.Add(this.labelWidth);
+            this.groupBoxExoHeader.Controls.Add(this.labelHeight);
+            this.groupBoxExoHeader.Controls.Add(this.labelAudioRate);
+            this.groupBoxExoHeader.Controls.Add(this.labelAudioCh);
+            this.groupBoxExoHeader.Controls.Add(this.numericAudioCh);
+            this.groupBoxExoHeader.Controls.Add(this.textBoxWidth);
+            this.groupBoxExoHeader.Controls.Add(this.labelFPS);
+            this.groupBoxExoHeader.Controls.Add(this.textBoxHeight);
+            this.groupBoxExoHeader.Controls.Add(this.numericFPS);
+            this.groupBoxExoHeader.Controls.Add(this.textBoxAudioRate);
+            this.groupBoxExoHeader.Location = new System.Drawing.Point(16, 247);
+            this.groupBoxExoHeader.Name = "groupBoxExoHeader";
+            this.groupBoxExoHeader.Size = new System.Drawing.Size(874, 141);
+            this.groupBoxExoHeader.TabIndex = 9;
+            this.groupBoxExoHeader.TabStop = false;
+            this.groupBoxExoHeader.Text = "EXOヘッダー";
             // 
             // labelHeaderNote
             // 
@@ -214,7 +229,7 @@
             // 
             this.labelWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelWidth.AutoSize = true;
-            this.labelWidth.Location = new System.Drawing.Point(459, 27);
+            this.labelWidth.Location = new System.Drawing.Point(643, 27);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(26, 21);
             this.labelWidth.TabIndex = 7;
@@ -224,7 +239,7 @@
             // 
             this.labelHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(560, 27);
+            this.labelHeight.Location = new System.Drawing.Point(744, 27);
             this.labelHeight.Name = "labelHeight";
             this.labelHeight.Size = new System.Drawing.Size(26, 21);
             this.labelHeight.TabIndex = 7;
@@ -234,7 +249,7 @@
             // 
             this.labelAudioRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAudioRate.AutoSize = true;
-            this.labelAudioRate.Location = new System.Drawing.Point(459, 81);
+            this.labelAudioRate.Location = new System.Drawing.Point(643, 81);
             this.labelAudioRate.Name = "labelAudioRate";
             this.labelAudioRate.Size = new System.Drawing.Size(107, 21);
             this.labelAudioRate.TabIndex = 7;
@@ -244,7 +259,7 @@
             // 
             this.labelAudioCh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAudioCh.AutoSize = true;
-            this.labelAudioCh.Location = new System.Drawing.Point(560, 81);
+            this.labelAudioCh.Location = new System.Drawing.Point(744, 81);
             this.labelAudioCh.Name = "labelAudioCh";
             this.labelAudioCh.Size = new System.Drawing.Size(103, 21);
             this.labelAudioCh.TabIndex = 7;
@@ -254,7 +269,7 @@
             // 
             this.numericAudioCh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numericAudioCh.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.numericAudioCh.Location = new System.Drawing.Point(564, 104);
+            this.numericAudioCh.Location = new System.Drawing.Point(748, 104);
             this.numericAudioCh.Maximum = new decimal(new int[] {
             2,
             0,
@@ -277,7 +292,7 @@
             // textBoxWidth
             // 
             this.textBoxWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxWidth.Location = new System.Drawing.Point(463, 49);
+            this.textBoxWidth.Location = new System.Drawing.Point(647, 49);
             this.textBoxWidth.Name = "textBoxWidth";
             this.textBoxWidth.Size = new System.Drawing.Size(95, 29);
             this.textBoxWidth.TabIndex = 0;
@@ -286,7 +301,7 @@
             // textBoxHeight
             // 
             this.textBoxHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxHeight.Location = new System.Drawing.Point(564, 49);
+            this.textBoxHeight.Location = new System.Drawing.Point(748, 49);
             this.textBoxHeight.Name = "textBoxHeight";
             this.textBoxHeight.Size = new System.Drawing.Size(104, 29);
             this.textBoxHeight.TabIndex = 0;
@@ -295,7 +310,7 @@
             // textBoxAudioRate
             // 
             this.textBoxAudioRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAudioRate.Location = new System.Drawing.Point(463, 104);
+            this.textBoxAudioRate.Location = new System.Drawing.Point(647, 104);
             this.textBoxAudioRate.Name = "textBoxAudioRate";
             this.textBoxAudioRate.Size = new System.Drawing.Size(95, 29);
             this.textBoxAudioRate.TabIndex = 0;
@@ -303,10 +318,12 @@
             // 
             // buttonAddObject
             // 
+            this.buttonAddObject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAddObject.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAddObject.Location = new System.Drawing.Point(16, 423);
+            this.buttonAddObject.Location = new System.Drawing.Point(3, 24);
             this.buttonAddObject.Name = "buttonAddObject";
-            this.buttonAddObject.Size = new System.Drawing.Size(155, 46);
+            this.buttonAddObject.Size = new System.Drawing.Size(261, 40);
             this.buttonAddObject.TabIndex = 1;
             this.buttonAddObject.Text = "追加";
             this.buttonAddObject.UseVisualStyleBackColor = true;
@@ -314,15 +331,17 @@
             // 
             // tabControlProperty
             // 
-            this.tabControlProperty.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tabControlProperty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlProperty.Controls.Add(this.tabPageDefault);
             this.tabControlProperty.Controls.Add(this.tabPageAudio);
             this.tabControlProperty.Controls.Add(this.tabPageAliasM);
             this.tabControlProperty.Controls.Add(this.tabPageAliasF);
-            this.tabControlProperty.Location = new System.Drawing.Point(171, 394);
+            this.tabControlProperty.Location = new System.Drawing.Point(276, 3);
             this.tabControlProperty.Name = "tabControlProperty";
             this.tabControlProperty.SelectedIndex = 0;
-            this.tabControlProperty.Size = new System.Drawing.Size(322, 441);
+            this.tabControlProperty.Size = new System.Drawing.Size(321, 404);
             this.tabControlProperty.TabIndex = 0;
             this.tabControlProperty.TabStop = false;
             this.tabControlProperty.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControlProperty_Selecting);
@@ -334,7 +353,7 @@
             this.tabPageDefault.Location = new System.Drawing.Point(4, 30);
             this.tabPageDefault.Name = "tabPageDefault";
             this.tabPageDefault.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefault.Size = new System.Drawing.Size(314, 407);
+            this.tabPageDefault.Size = new System.Drawing.Size(313, 357);
             this.tabPageDefault.TabIndex = 3;
             // 
             // labelObj
@@ -345,7 +364,7 @@
             this.labelObj.Name = "labelObj";
             this.labelObj.Size = new System.Drawing.Size(289, 222);
             this.labelObj.TabIndex = 0;
-            this.labelObj.Text = "対応形式\r\n・ 音声(wav)\r\n\r\n未対応\r\n・ メディアオブジェクト(exa)\r\n・ フィルタオブジェクト(exa)";
+            this.labelObj.Text = "対応形式\r\n・ 音声(wav)\r\n・ 音声(mp3)\r\n未対応\r\n・ メディアオブジェクト(exa)\r\n・ フィルタオブジェクト(exa)";
             // 
             // tabPageAudio
             // 
@@ -368,13 +387,15 @@
             this.tabPageAudio.Location = new System.Drawing.Point(4, 30);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(314, 407);
+            this.tabPageAudio.Size = new System.Drawing.Size(313, 370);
             this.tabPageAudio.TabIndex = 0;
             this.tabPageAudio.Text = "音声";
             // 
             // buttonAPlay
             // 
-            this.buttonAPlay.Location = new System.Drawing.Point(10, 367);
+            this.buttonAPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAPlay.Location = new System.Drawing.Point(10, 333);
             this.buttonAPlay.Name = "buttonAPlay";
             this.buttonAPlay.Size = new System.Drawing.Size(293, 34);
             this.buttonAPlay.TabIndex = 3;
@@ -396,7 +417,7 @@
             // numericALayer
             // 
             this.numericALayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericALayer.Location = new System.Drawing.Point(163, 83);
+            this.numericALayer.Location = new System.Drawing.Point(167, 83);
             this.numericALayer.Minimum = new decimal(new int[] {
             1,
             0,
@@ -416,7 +437,7 @@
             // 
             this.labelALayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelALayer.AutoSize = true;
-            this.labelALayer.Location = new System.Drawing.Point(159, 59);
+            this.labelALayer.Location = new System.Drawing.Point(163, 59);
             this.labelALayer.Name = "labelALayer";
             this.labelALayer.Size = new System.Drawing.Size(55, 21);
             this.labelALayer.TabIndex = 0;
@@ -445,7 +466,7 @@
             // 
             this.numericAPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numericAPlaySpeed.DecimalPlaces = 1;
-            this.numericAPlaySpeed.Location = new System.Drawing.Point(163, 139);
+            this.numericAPlaySpeed.Location = new System.Drawing.Point(167, 139);
             this.numericAPlaySpeed.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -475,7 +496,7 @@
             0,
             0,
             65536});
-            this.numericAPan.Location = new System.Drawing.Point(163, 195);
+            this.numericAPan.Location = new System.Drawing.Point(167, 195);
             this.numericAPan.Minimum = new decimal(new int[] {
             100,
             0,
@@ -526,7 +547,7 @@
             // 
             this.labelAPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAPan.AutoSize = true;
-            this.labelAPan.Location = new System.Drawing.Point(159, 171);
+            this.labelAPan.Location = new System.Drawing.Point(163, 171);
             this.labelAPan.Name = "labelAPan";
             this.labelAPan.Size = new System.Drawing.Size(42, 21);
             this.labelAPan.TabIndex = 0;
@@ -536,7 +557,7 @@
             // 
             this.labelAPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAPlaySpeed.AutoSize = true;
-            this.labelAPlaySpeed.Location = new System.Drawing.Point(159, 115);
+            this.labelAPlaySpeed.Location = new System.Drawing.Point(163, 115);
             this.labelAPlaySpeed.Name = "labelAPlaySpeed";
             this.labelAPlaySpeed.Size = new System.Drawing.Size(74, 21);
             this.labelAPlaySpeed.TabIndex = 0;
@@ -567,7 +588,7 @@
             this.textBoxAFilePath.Location = new System.Drawing.Point(6, 27);
             this.textBoxAFilePath.Name = "textBoxAFilePath";
             this.textBoxAFilePath.ReadOnly = true;
-            this.textBoxAFilePath.Size = new System.Drawing.Size(297, 29);
+            this.textBoxAFilePath.Size = new System.Drawing.Size(301, 29);
             this.textBoxAFilePath.TabIndex = 0;
             // 
             // tabPageAliasM
@@ -577,7 +598,7 @@
             this.tabPageAliasM.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasM.Name = "tabPageAliasM";
             this.tabPageAliasM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasM.Size = new System.Drawing.Size(314, 407);
+            this.tabPageAliasM.Size = new System.Drawing.Size(313, 286);
             this.tabPageAliasM.TabIndex = 1;
             this.tabPageAliasM.Text = "メディア";
             // 
@@ -597,7 +618,7 @@
             this.tabPageAliasF.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasF.Name = "tabPageAliasF";
             this.tabPageAliasF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasF.Size = new System.Drawing.Size(314, 407);
+            this.tabPageAliasF.Size = new System.Drawing.Size(313, 286);
             this.tabPageAliasF.TabIndex = 2;
             this.tabPageAliasF.Text = "フィルタ";
             // 
@@ -615,9 +636,9 @@
             this.buttonGen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGen.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.buttonGen.Location = new System.Drawing.Point(16, 942);
+            this.buttonGen.Location = new System.Drawing.Point(16, 890);
             this.buttonGen.Name = "buttonGen";
-            this.buttonGen.Size = new System.Drawing.Size(690, 57);
+            this.buttonGen.Size = new System.Drawing.Size(874, 57);
             this.buttonGen.TabIndex = 10;
             this.buttonGen.Text = "EXOを生成";
             this.buttonGen.UseVisualStyleBackColor = true;
@@ -634,19 +655,22 @@
             // 
             // groupBoxUsage
             // 
+            this.groupBoxUsage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxUsage.Controls.Add(this.labelVersion);
             this.groupBoxUsage.Controls.Add(this.labelUsage);
             this.groupBoxUsage.Location = new System.Drawing.Point(16, 12);
             this.groupBoxUsage.Name = "groupBoxUsage";
-            this.groupBoxUsage.Size = new System.Drawing.Size(690, 153);
+            this.groupBoxUsage.Size = new System.Drawing.Size(874, 153);
             this.groupBoxUsage.TabIndex = 12;
             this.groupBoxUsage.TabStop = false;
             this.groupBoxUsage.Text = "使い方";
             // 
             // labelVersion
             // 
+            this.labelVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(597, 129);
+            this.labelVersion.Location = new System.Drawing.Point(781, 129);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(87, 21);
             this.labelVersion.TabIndex = 12;
@@ -654,9 +678,13 @@
             // 
             // buttonAllF
             // 
-            this.buttonAllF.Location = new System.Drawing.Point(495, 423);
+            this.buttonAllF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAllF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAllF.Location = new System.Drawing.Point(3, 23);
             this.buttonAllF.Name = "buttonAllF";
-            this.buttonAllF.Size = new System.Drawing.Size(75, 42);
+            this.buttonAllF.Size = new System.Drawing.Size(128, 43);
             this.buttonAllF.TabIndex = 13;
             this.buttonAllF.Text = "全非選";
             this.buttonAllF.UseVisualStyleBackColor = true;
@@ -664,39 +692,120 @@
             // 
             // buttonAllInv
             // 
-            this.buttonAllInv.Location = new System.Drawing.Point(631, 425);
+            this.buttonAllInv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAllInv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAllInv.Location = new System.Drawing.Point(137, 23);
             this.buttonAllInv.Name = "buttonAllInv";
-            this.buttonAllInv.Size = new System.Drawing.Size(75, 42);
+            this.buttonAllInv.Size = new System.Drawing.Size(128, 43);
             this.buttonAllInv.TabIndex = 13;
             this.buttonAllInv.Text = "選反転";
             this.buttonAllInv.UseVisualStyleBackColor = true;
             this.buttonAllInv.Click += new System.EventHandler(this.buttonAllInv_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(6, 28);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(447, 25);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "同じキーに複数の音声が割り当てられていた場合ランダムに設置する";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxSettings
+            // 
+            this.groupBoxSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSettings.Controls.Add(this.checkBox1);
+            this.groupBoxSettings.Location = new System.Drawing.Point(16, 803);
+            this.groupBoxSettings.Name = "groupBoxSettings";
+            this.groupBoxSettings.Size = new System.Drawing.Size(874, 81);
+            this.groupBoxSettings.TabIndex = 14;
+            this.groupBoxSettings.TabStop = false;
+            this.groupBoxSettings.Text = "設定";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 327F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tabControlProperty, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 394);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(874, 410);
+            this.tableLayoutPanel1.TabIndex = 15;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.labelKey, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.checkedListBoxKey, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.buttonAllF, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonAllInv, 1, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(603, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(268, 404);
+            this.tableLayoutPanel2.TabIndex = 16;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.buttonAddObject, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.listBoxSetee, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.labelObject, 0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(267, 404);
+            this.tableLayoutPanel4.TabIndex = 17;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 1003);
-            this.Controls.Add(this.buttonAllInv);
-            this.Controls.Add(this.buttonAllF);
+            this.ClientSize = new System.Drawing.Size(900, 959);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.groupBoxSettings);
             this.Controls.Add(this.groupBoxUsage);
             this.Controls.Add(this.buttonGen);
-            this.Controls.Add(this.tabControlProperty);
-            this.Controls.Add(this.groupBoxHeader);
-            this.Controls.Add(this.labelKey);
-            this.Controls.Add(this.checkedListBoxKey);
-            this.Controls.Add(this.listBoxSetee);
-            this.Controls.Add(this.labelObject);
-            this.Controls.Add(this.buttonAddObject);
+            this.Controls.Add(this.groupBoxExoHeader);
             this.Controls.Add(this.buttonOpenVMD);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(732, 574);
+            this.MinimumSize = new System.Drawing.Size(732, 898);
             this.Name = "MainForm";
             this.Text = "VMD to EXO Generator";
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).EndInit();
-            this.groupBoxHeader.ResumeLayout(false);
-            this.groupBoxHeader.PerformLayout();
+            this.groupBoxExoHeader.ResumeLayout(false);
+            this.groupBoxExoHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).EndInit();
             this.tabControlProperty.ResumeLayout(false);
             this.tabPageDefault.ResumeLayout(false);
@@ -715,8 +824,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilter)).EndInit();
             this.groupBoxUsage.ResumeLayout(false);
             this.groupBoxUsage.PerformLayout();
+            this.groupBoxSettings.ResumeLayout(false);
+            this.groupBoxSettings.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -728,7 +843,7 @@
         private System.Windows.Forms.Label labelKey;
         private System.Windows.Forms.Label labelFPS;
         private System.Windows.Forms.NumericUpDown numericFPS;
-        private System.Windows.Forms.GroupBox groupBoxHeader;
+        private System.Windows.Forms.GroupBox groupBoxExoHeader;
         private System.Windows.Forms.Label labelWidth;
         private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.Label labelAudioRate;
@@ -768,6 +883,11 @@
         private System.Windows.Forms.Button buttonAllF;
         private System.Windows.Forms.Button buttonAllInv;
         private System.Windows.Forms.Button buttonAPlay;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBoxSettings;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }
 
