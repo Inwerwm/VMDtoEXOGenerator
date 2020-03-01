@@ -1,10 +1,11 @@
 ﻿using SlimDX;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace VmdIO
 {
-    public interface IVmdFrameData
+    public interface IVmdFrameData : IComparable<IVmdFrameData>
     {
         uint FrameTime { get; set; }
 
@@ -190,6 +191,11 @@ namespace VmdIO
         {
             return new byte[] { (byte)(pos1.X * 127), (byte)(pos1.Y * 127), (byte)(pos2.X * 127), (byte)(pos2.Y * 127) };
         }
+
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
+        }
     }
 
     public struct VmdMorphFrameData : IVmdModelFrameData
@@ -218,6 +224,11 @@ namespace VmdIO
             Name = new string(VocaloidMotionData.Encoding.GetChars(bName));
             FrameTime = reader.ReadUInt32();
             Weigth = reader.ReadSingle();
+        }
+
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
         }
     }
 
@@ -285,6 +296,11 @@ namespace VmdIO
             writer.Write(InterpolatePointA);
             writer.Write(Pers);
         }
+
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
+        }
     }
 
     public struct VmdLightFrameData : IVmdFrameData
@@ -312,6 +328,11 @@ namespace VmdIO
             writer.Write(FrameTime);
             writer.Write(RGB);
             writer.Write(Pos);
+        }
+
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
         }
     }
 
@@ -343,6 +364,10 @@ namespace VmdIO
             writer.Write(Dist);
         }
 
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
+        }
     }
 
     public struct VmdPropertyFrameData : IVmdFrameData
@@ -399,6 +424,10 @@ namespace VmdIO
             }
         }
 
+        public int CompareTo(IVmdFrameData frame)
+        {
+            return FrameTime.CompareTo(frame.FrameTime);
+        }
     }
 
     class VmdMotionFrameDataEqualityComparer : IEqualityComparer<VmdMotionFrameData>

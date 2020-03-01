@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AviutlExEditObject
@@ -14,6 +15,7 @@ namespace AviutlExEditObject
         public int AudioCh { set; get; }
 
         public List<ExEditObject> Objects { private set; get; }
+        private bool NeedSort;
 
         public ExEditObjectData()
         {
@@ -24,10 +26,15 @@ namespace AviutlExEditObject
             Length = 0;
             AudioRate = 44100;
             AudioCh = 2;
+            NeedSort = true;
 
             Objects = new List<ExEditObject>();
         }
 
+        /// <summary>
+        /// EXOデータを書き込む
+        /// </summary>
+        /// <param name="streamWriter">エンコードをshift_jisにすること</param>
         public void Write(StreamWriter streamWriter)
         {
             streamWriter.Write(ToString());
@@ -50,9 +57,33 @@ namespace AviutlExEditObject
             output += "audio_ch=" + AudioCh.ToString() + "\r\n";
             return output;
         }
+
+        public void ObjectsSafeAdd(ExEditObject obj)
+        {
+            if (NeedSort)
+                Objects.Sort();
+            NeedSort = true;
+
+            //衝突判定
+            //追加するオブジェクトの始端以降の末端をもつ最初のオブジェクトの添字
+            int k = Objects.FindIndex(o => o.Layer==obj.Layer && obj.Start <= o.End);
+            if (k < 0)
+                //非接触：同じレイヤーの既存のオブジェクトの末端よりも後
+                Objects.Add(obj);
+            else if (obj.End < Objects[k].Start)
+                //非接触：直後のオブジェクトの始端より追加オブジェクトの終端が早い
+                Objects.Add(obj);
+            else
+            {
+                //接触：レイヤーを一つ上げて再帰
+                obj.Layer++;
+                NeedSort = false;
+                ObjectsSafeAdd(obj);
+            }
+        }
     }
 
-    public class ExEditObject
+    public class ExEditObject: IComparable<ExEditObject>
     {
         public int Start { set; get; }
         public int End { set; get; }
@@ -115,6 +146,11 @@ namespace AviutlExEditObject
             }
 
             return output;
+        }
+
+        public int CompareTo(ExEditObject obj)
+        {
+            return Start.CompareTo(obj.Start);
         }
     }
 

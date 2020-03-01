@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonOpenVMD = new System.Windows.Forms.Button();
             this.labelObject = new System.Windows.Forms.Label();
             this.listBoxSetee = new System.Windows.Forms.ListBox();
@@ -52,8 +53,6 @@
             this.tabPageAudio = new System.Windows.Forms.TabPage();
             this.buttonAPlay = new System.Windows.Forms.Button();
             this.labelAPath = new System.Windows.Forms.Label();
-            this.numericALayer = new System.Windows.Forms.NumericUpDown();
-            this.labelALayer = new System.Windows.Forms.Label();
             this.numericAVolume = new System.Windows.Forms.NumericUpDown();
             this.numericAPlaySpeed = new System.Windows.Forms.NumericUpDown();
             this.numericAPan = new System.Windows.Forms.NumericUpDown();
@@ -75,18 +74,21 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.buttonAllF = new System.Windows.Forms.Button();
             this.buttonAllInv = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxRandomAudio = new System.Windows.Forms.CheckBox();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
+            this.groupBoxDupSetting = new System.Windows.Forms.GroupBox();
+            this.radioButtonDupCut = new System.Windows.Forms.RadioButton();
+            this.radioButtonDupLayer = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).BeginInit();
             this.groupBoxExoHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).BeginInit();
             this.tabControlProperty.SuspendLayout();
             this.tabPageDefault.SuspendLayout();
             this.tabPageAudio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericALayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlaySpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPan)).BeginInit();
@@ -98,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilter)).BeginInit();
             this.groupBoxUsage.SuspendLayout();
             this.groupBoxSettings.SuspendLayout();
+            this.groupBoxDupSetting.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -362,17 +365,15 @@
             this.labelObj.Font = new System.Drawing.Font("Yu Gothic UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.labelObj.Location = new System.Drawing.Point(6, 3);
             this.labelObj.Name = "labelObj";
-            this.labelObj.Size = new System.Drawing.Size(289, 222);
+            this.labelObj.Size = new System.Drawing.Size(289, 259);
             this.labelObj.TabIndex = 0;
-            this.labelObj.Text = "対応形式\r\n・ 音声(wav)\r\n・ 音声(mp3)\r\n未対応\r\n・ メディアオブジェクト(exa)\r\n・ フィルタオブジェクト(exa)";
+            this.labelObj.Text = "対応\r\n・ 音声(wav)\r\n・ 音声(mp3)\r\n\r\n未対応\r\n・ メディアオブジェクト(exa)\r\n・ フィルタオブジェクト(exa)";
             // 
             // tabPageAudio
             // 
             this.tabPageAudio.BackColor = System.Drawing.SystemColors.Control;
             this.tabPageAudio.Controls.Add(this.buttonAPlay);
             this.tabPageAudio.Controls.Add(this.labelAPath);
-            this.tabPageAudio.Controls.Add(this.numericALayer);
-            this.tabPageAudio.Controls.Add(this.labelALayer);
             this.tabPageAudio.Controls.Add(this.numericAVolume);
             this.tabPageAudio.Controls.Add(this.numericAPlaySpeed);
             this.tabPageAudio.Controls.Add(this.numericAPan);
@@ -413,35 +414,6 @@
             this.labelAPath.Size = new System.Drawing.Size(80, 21);
             this.labelAPath.TabIndex = 2;
             this.labelAPath.Text = "ファイルパス";
-            // 
-            // numericALayer
-            // 
-            this.numericALayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericALayer.Location = new System.Drawing.Point(167, 83);
-            this.numericALayer.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericALayer.Name = "numericALayer";
-            this.numericALayer.Size = new System.Drawing.Size(140, 29);
-            this.numericALayer.TabIndex = 1;
-            this.numericALayer.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericALayer.ValueChanged += new System.EventHandler(this.numericALayer_ValueChanged);
-            // 
-            // labelALayer
-            // 
-            this.labelALayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelALayer.AutoSize = true;
-            this.labelALayer.Location = new System.Drawing.Point(163, 59);
-            this.labelALayer.Name = "labelALayer";
-            this.labelALayer.Size = new System.Drawing.Size(55, 21);
-            this.labelALayer.TabIndex = 0;
-            this.labelALayer.Text = "レイヤー";
             // 
             // numericAVolume
             // 
@@ -705,29 +677,67 @@
             this.buttonAllInv.UseVisualStyleBackColor = true;
             this.buttonAllInv.Click += new System.EventHandler(this.buttonAllInv_Click);
             // 
-            // checkBox1
+            // checkBoxRandomAudio
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 28);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(447, 25);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "同じキーに複数の音声が割り当てられていた場合ランダムに設置する";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxRandomAudio.AutoSize = true;
+            this.checkBoxRandomAudio.Checked = true;
+            this.checkBoxRandomAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRandomAudio.Location = new System.Drawing.Point(6, 48);
+            this.checkBoxRandomAudio.Name = "checkBoxRandomAudio";
+            this.checkBoxRandomAudio.Size = new System.Drawing.Size(147, 25);
+            this.checkBoxRandomAudio.TabIndex = 14;
+            this.checkBoxRandomAudio.Text = "同キー音声ランダム";
+            this.toolTipHelp.SetToolTip(this.checkBoxRandomAudio, "同じキーフレームに複数の音声が割り当てられていた場合\r\n設置毎にランダムに選んだ1つだけを設置します\r\nOFFの場合は割り当てられている全ての音声が設置され\r\n一" +
+        "斉に再生されることになります");
+            this.checkBoxRandomAudio.UseVisualStyleBackColor = true;
             // 
             // groupBoxSettings
             // 
             this.groupBoxSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxSettings.Controls.Add(this.checkBox1);
+            this.groupBoxSettings.Controls.Add(this.groupBoxDupSetting);
+            this.groupBoxSettings.Controls.Add(this.checkBoxRandomAudio);
             this.groupBoxSettings.Location = new System.Drawing.Point(16, 803);
             this.groupBoxSettings.Name = "groupBoxSettings";
             this.groupBoxSettings.Size = new System.Drawing.Size(874, 81);
             this.groupBoxSettings.TabIndex = 14;
             this.groupBoxSettings.TabStop = false;
             this.groupBoxSettings.Text = "設定";
+            // 
+            // groupBoxDupSetting
+            // 
+            this.groupBoxDupSetting.Controls.Add(this.radioButtonDupCut);
+            this.groupBoxDupSetting.Controls.Add(this.radioButtonDupLayer);
+            this.groupBoxDupSetting.Location = new System.Drawing.Point(176, 18);
+            this.groupBoxDupSetting.Name = "groupBoxDupSetting";
+            this.groupBoxDupSetting.Size = new System.Drawing.Size(200, 57);
+            this.groupBoxDupSetting.TabIndex = 15;
+            this.groupBoxDupSetting.TabStop = false;
+            this.groupBoxDupSetting.Text = "重複時処理";
+            // 
+            // radioButtonDupCut
+            // 
+            this.radioButtonDupCut.AutoSize = true;
+            this.radioButtonDupCut.Location = new System.Drawing.Point(115, 29);
+            this.radioButtonDupCut.Name = "radioButtonDupCut";
+            this.radioButtonDupCut.Size = new System.Drawing.Size(85, 25);
+            this.radioButtonDupCut.TabIndex = 0;
+            this.radioButtonDupCut.TabStop = true;
+            this.radioButtonDupCut.Text = "割り込み";
+            this.toolTipHelp.SetToolTip(this.radioButtonDupCut, "同キー・同設置オブジェクトが時間的に重複していた場合\r\n既に設置されているオブジェクトを終了させて\r\n新しいオブジェクトを同じレイヤーで開始します");
+            this.radioButtonDupCut.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDupLayer
+            // 
+            this.radioButtonDupLayer.AutoSize = true;
+            this.radioButtonDupLayer.Location = new System.Drawing.Point(7, 29);
+            this.radioButtonDupLayer.Name = "radioButtonDupLayer";
+            this.radioButtonDupLayer.Size = new System.Drawing.Size(102, 25);
+            this.radioButtonDupLayer.TabIndex = 0;
+            this.radioButtonDupLayer.TabStop = true;
+            this.radioButtonDupLayer.Text = "レイヤー下げ";
+            this.toolTipHelp.SetToolTip(this.radioButtonDupLayer, "同キー・同設置オブジェクトが時間的に重複していた場合\r\nレイヤーを下げることで対応します");
+            this.radioButtonDupLayer.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -788,6 +798,12 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(267, 404);
             this.tableLayoutPanel4.TabIndex = 17;
             // 
+            // toolTipHelp
+            // 
+            this.toolTipHelp.AutoPopDelay = 32767;
+            this.toolTipHelp.InitialDelay = 1;
+            this.toolTipHelp.ReshowDelay = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -813,7 +829,6 @@
             this.tabPageDefault.PerformLayout();
             this.tabPageAudio.ResumeLayout(false);
             this.tabPageAudio.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericALayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlaySpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPan)).EndInit();
@@ -827,6 +842,8 @@
             this.groupBoxUsage.PerformLayout();
             this.groupBoxSettings.ResumeLayout(false);
             this.groupBoxSettings.PerformLayout();
+            this.groupBoxDupSetting.ResumeLayout(false);
+            this.groupBoxDupSetting.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -860,8 +877,6 @@
         private System.Windows.Forms.TabPage tabPageAliasM;
         private System.Windows.Forms.TabPage tabPageAliasF;
         private System.Windows.Forms.Label labelAPath;
-        private System.Windows.Forms.NumericUpDown numericALayer;
-        private System.Windows.Forms.Label labelALayer;
         private System.Windows.Forms.NumericUpDown numericAVolume;
         private System.Windows.Forms.NumericUpDown numericAPlaySpeed;
         private System.Windows.Forms.NumericUpDown numericAPan;
@@ -884,11 +899,15 @@
         private System.Windows.Forms.Button buttonAllF;
         private System.Windows.Forms.Button buttonAllInv;
         private System.Windows.Forms.Button buttonAPlay;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxRandomAudio;
         private System.Windows.Forms.GroupBox groupBoxSettings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.GroupBox groupBoxDupSetting;
+        private System.Windows.Forms.RadioButton radioButtonDupCut;
+        private System.Windows.Forms.RadioButton radioButtonDupLayer;
     }
 }
 

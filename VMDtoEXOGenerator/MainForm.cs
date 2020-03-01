@@ -177,7 +177,6 @@ namespace VMDtoEXOGenerator
 
         private void SetAudioParameter(int id)
         {
-            numericALayer.Value = ObjectList[id].ExObject.Layer;
             numericAStartOffset.Value = ObjectList[id].Offset;
 
             //makeAudioObject() が ExAudio → ExoStandardPlay の順でオーディオデータを入力
@@ -206,12 +205,6 @@ namespace VMDtoEXOGenerator
         {
             int id = listBoxSetee.SelectedIndex;
             ObjectList[id].Offset = (int)numericAStartOffset.Value;
-        }
-
-        private void numericALayer_ValueChanged(object sender, EventArgs e)
-        {
-            int id = listBoxSetee.SelectedIndex;
-            ObjectList[id].ExObject.Layer = (int)numericALayer.Value;
         }
 
         private void numericAPlayPos_ValueChanged(object sender, EventArgs e)
@@ -299,7 +292,60 @@ namespace VMDtoEXOGenerator
             exo.AudioCh = (int)numericAudioCh.Value;
 
             ObjectData.FPS = exo.FPS;
+            //音声オブジェクトとそれ以外を分ける
+            //音声オブジェクト以外は未実装のため簡略化
+            var AudioObjects = ObjectList.Where(o => o.Type == ObjectType.Audio).ToList();
+            //var OtherObjects = ObjectList.Where(o => o.Type != ObjectType.Audio).ToList();
 
+            //音声オブジェクトの配置
+            if (checkBoxRandomAudio.Checked)
+            {
+                //同キー音声ランダム化ON
+                var Keys = AudioObjects.Select(o => o.Keys).SelectMany(s => s).ToList();
+                Keys.Distinct();
+
+                for (int i = 0; i < checkedListBoxKey.Items.Count; i++)
+                {
+                    var AudioObjectsPerKey = AudioObjects.Where(o => o.Keys.Contains(checkedListBoxKey.Items[i].ToString())).ToList();
+
+                }
+            }
+            else
+            {
+                foreach (var o in AudioObjects)
+                {
+                    foreach (var k in o.Keys)
+                    {
+                        var vmdFrames = GetBasisVmdFrames(k);
+                        foreach (var f in vmdFrames)
+                        {
+                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
+                        }
+                    }
+                }
+            }
+
+            //その他オブジェクトの配置
+            //未実装のためなし
+
+            //exoファイルの書き出し
+            exo.Length = exo.Objects.Max(o => o.End);
+            using (var writer = new StreamWriter("Generate_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".exo", false, System.Text.Encoding.GetEncoding("shift_jis")))
+            {
+                exo.Write(writer);
+            }
+        }
+
+        private List<IVmdModelFrameData> GetBasisVmdFrames(string key)
+        {
+            var vmdFrames = new List<IVmdModelFrameData>();
+            vmdFrames.AddRange(vmd.MotionFrames.Where(f => f.Name == key).Select(f => (IVmdModelFrameData)f).ToList());
+            vmdFrames.AddRange(vmd.MorphFrames.Where(f => f.Name == key).Select(f => (IVmdModelFrameData)f).ToList());
+            //初期位置は全てのボーンとモーフが含まれている可能性が高いため除去
+            vmdFrames.RemoveAll(f => f.FrameTime == 0);
+
+            vmdFrames.Sort();
+            return vmdFrames;
         }
     }
 
