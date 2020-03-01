@@ -353,7 +353,7 @@
             this.tabPageDefault.Location = new System.Drawing.Point(4, 30);
             this.tabPageDefault.Name = "tabPageDefault";
             this.tabPageDefault.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefault.Size = new System.Drawing.Size(313, 357);
+            this.tabPageDefault.Size = new System.Drawing.Size(313, 370);
             this.tabPageDefault.TabIndex = 3;
             // 
             // labelObj
@@ -598,7 +598,7 @@
             this.tabPageAliasM.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasM.Name = "tabPageAliasM";
             this.tabPageAliasM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasM.Size = new System.Drawing.Size(313, 286);
+            this.tabPageAliasM.Size = new System.Drawing.Size(313, 370);
             this.tabPageAliasM.TabIndex = 1;
             this.tabPageAliasM.Text = "メディア";
             // 
@@ -618,7 +618,7 @@
             this.tabPageAliasF.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasF.Name = "tabPageAliasF";
             this.tabPageAliasF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasF.Size = new System.Drawing.Size(313, 286);
+            this.tabPageAliasF.Size = new System.Drawing.Size(313, 370);
             this.tabPageAliasF.TabIndex = 2;
             this.tabPageAliasF.Text = "フィルタ";
             // 
@@ -642,6 +642,7 @@
             this.buttonGen.TabIndex = 10;
             this.buttonGen.Text = "EXOを生成";
             this.buttonGen.UseVisualStyleBackColor = true;
+            this.buttonGen.Click += new System.EventHandler(this.buttonGen_Click);
             // 
             // labelUsage
             // 

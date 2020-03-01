@@ -13,7 +13,6 @@ namespace VMDtoEXOGenerator
     {
         VocaloidMotionData vmd;
 
-        List<(string Name, bool Checked)> Key;
         List<ObjectData> ObjectList;
 
         bool canChangeTab;
@@ -32,12 +31,6 @@ namespace VMDtoEXOGenerator
             labelVersion.Text = "Version 1.0";
         }
 
-        private void SetCheckedListBoxKey()
-        {
-            checkedListBoxKey.Items.Clear();
-            checkedListBoxKey.Items.AddRange(Key.Select(k => k.Name).ToArray());
-        }
-
         private void OpenVMD(string[] path)
         {
             foreach (var s in path)
@@ -51,8 +44,8 @@ namespace VMDtoEXOGenerator
             vmd.MotionFrames.Distinct(new VmdMotionFrameDataEqualityComparer());
             vmd.MorphFrames.Distinct(new VmdMorphFrameDataEqualityComparer());
 
-            Key = vmd.GetKeyNames(VocaloidMotionData.GetKeyIgnoring.FirstFrame).ConvertAll(n => (n, false));
-            SetCheckedListBoxKey();
+            checkedListBoxKey.Items.Clear();
+            checkedListBoxKey.Items.AddRange(vmd.GetKeyNames(VocaloidMotionData.GetKeyIgnoring.FirstFrame).ToArray());
         }
 
         private void OpenObjects(string[] path)
@@ -282,6 +275,32 @@ namespace VMDtoEXOGenerator
         {
             buttonAPlay.Text = ObjectList[id].isPlaying() ? "■ 停止" : "▶ 再生";
         }
+
+        private void buttonGen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                generateExo();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void generateExo()
+        {
+            ExEditObjectData exo = new ExEditObjectData();
+            exo.Width = int.Parse(textBoxWidth.Text);
+            exo.Height = int.Parse(textBoxHeight.Text);
+            exo.FPS = (int)numericFPS.Value;
+            exo.AudioRate = int.Parse(textBoxAudioRate.Text);
+            exo.AudioCh = (int)numericAudioCh.Value;
+
+            ObjectData.FPS = exo.FPS;
+
+        }
     }
 
     public enum ObjectType
@@ -297,7 +316,7 @@ namespace VMDtoEXOGenerator
         /// <summary>
         /// 30fps
         /// </summary>
-        public uint Length { get; set; }
+        public int Length { get; set; }
         /// <summary>
         /// 30fps
         /// </summary>
@@ -308,6 +327,8 @@ namespace VMDtoEXOGenerator
         private AudioFileReader Audio;
         private static AudioFileReader playingAudio;
         public static WaveOut Player;
+
+        public static int FPS { get; set; }
 
         public ObjectData(string path, ObjectType type, ExEditObject obj, int offset = 0)
         {
@@ -321,7 +342,7 @@ namespace VMDtoEXOGenerator
             {
                 case ObjectType.Audio:
                     Audio = new AudioFileReader(Path);
-                    Length = (uint)Math.Ceiling(Audio.TotalTime.TotalSeconds * 30);
+                    Length = (int)Math.Ceiling(Audio.TotalTime.TotalSeconds * 30);
                     Player = new WaveOut();
                     break;
                 case ObjectType.Media:
@@ -377,6 +398,19 @@ namespace VMDtoEXOGenerator
 
 
             return playingAudio == Audio && Player.PlaybackState == PlaybackState.Playing;
+        }
+
+        public ExEditObject GetExEditObjectAt(int startFrame)
+        {
+            var obj = new ExEditObject(ExObject);
+            obj.Start = FpsCorrection(startFrame) + FpsCorrection(Offset);
+            obj.End = obj.Start + FpsCorrection(Length);
+            return obj;
+        }
+
+        private static int FpsCorrection(int value)
+        {
+            return (int)Math.Ceiling(value * FPS / 30M);
         }
     }
 }

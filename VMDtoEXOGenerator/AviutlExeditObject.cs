@@ -78,6 +78,23 @@ namespace AviutlExEditObject
             Property = new List<IExObjectType>();
         }
 
+        public ExEditObject(ExEditObject obj)
+        {
+            Start = obj.Start;
+            End = obj.End;
+            Layer = obj.Layer;
+            Overlay = obj.Overlay;
+            Camera = obj.Camera;
+            Audio = obj.Audio;
+            Chain = obj.Chain;
+
+            Property = new List<IExObjectType>();
+            foreach (var p in obj.Property)
+            {
+                Property.Add((IExObjectType)p.Clone());
+            }
+        }
+
         public string ToString(int index)
         {
             string output;
@@ -116,6 +133,8 @@ namespace AviutlExEditObject
         /// </summary>
         /// <param name="list">プロパティの値を実装順に並べたList</param>
         void SetBy(List<object> list);
+
+        object Clone();
     }
 
     public class ExoAudio : IExObjectType
@@ -133,6 +152,20 @@ namespace AviutlExEditObject
             Loop = loop;
             Linkage = linkage;
             FilePath = filePath;
+        }
+
+        public ExoAudio(ExoAudio audio)
+        {
+            Start = audio.Start;
+            Speed = audio.Speed;
+            Loop = audio.Loop;
+            Linkage = audio.Linkage;
+            FilePath = audio.FilePath;
+        }
+
+        public object Clone()
+        {
+            return new ExoAudio(this);
         }
 
         public override string ToString()
@@ -176,6 +209,17 @@ namespace AviutlExEditObject
         {
             Volume = volume;
             Side = side;
+        }
+
+        public ExoStandardPlay(ExoStandardPlay sPlay)
+        {
+            Volume = sPlay.Volume;
+            Side = sPlay.Side;
+        }
+
+        public object Clone()
+        {
+            return new ExoStandardPlay(this);
         }
 
         public override string ToString()
