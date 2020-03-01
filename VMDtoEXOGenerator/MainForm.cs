@@ -341,6 +341,8 @@ namespace VMDtoEXOGenerator
             {
                 exo.Write(writer);
             }
+
+            MessageBox.Show("EXOファイル出力完了");
         }
 
         private List<IVmdModelFrameData> GetBasisVmdFrames(string key)
