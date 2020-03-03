@@ -342,7 +342,7 @@ namespace VMDtoEXOGenerator
                 exo.Write(writer);
             }
 
-            MessageBox.Show("EXOファイル出力完了"+Environment.NewLine+"実行ファイルと同じディレクトリに出力しました");
+            MessageBox.Show("EXOファイル出力完了" + Environment.NewLine + "実行ファイルと同じディレクトリに出力しました");
         }
 
         private List<IVmdModelFrameData> GetBasisVmdFrames(string key)
@@ -398,7 +398,8 @@ namespace VMDtoEXOGenerator
                 case ObjectType.Audio:
                     Audio = new AudioFileReader(Path);
                     Length = (int)Math.Ceiling(Audio.TotalTime.TotalSeconds * 30);
-                    Player = new WaveOut();
+                    if (Player == null)
+                        Player = new WaveOut();
                     break;
                 case ObjectType.Media:
                 case ObjectType.Filter:

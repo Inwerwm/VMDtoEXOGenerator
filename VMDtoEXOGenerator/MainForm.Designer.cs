@@ -36,6 +36,9 @@
             this.labelFPS = new System.Windows.Forms.Label();
             this.numericFPS = new System.Windows.Forms.NumericUpDown();
             this.groupBoxExoHeader = new System.Windows.Forms.GroupBox();
+            this.groupBoxRandomAudio = new System.Windows.Forms.GroupBox();
+            this.labelRandomAudio = new System.Windows.Forms.Label();
+            this.checkBoxRandomAudio = new System.Windows.Forms.CheckBox();
             this.labelHeaderNote = new System.Windows.Forms.Label();
             this.labelWidth = new System.Windows.Forms.Label();
             this.labelHeight = new System.Windows.Forms.Label();
@@ -70,18 +73,16 @@
             this.buttonGen = new System.Windows.Forms.Button();
             this.labelUsage = new System.Windows.Forms.Label();
             this.groupBoxUsage = new System.Windows.Forms.GroupBox();
+            this.labelHeaderDesc = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.buttonAllF = new System.Windows.Forms.Button();
             this.buttonAllInv = new System.Windows.Forms.Button();
-            this.checkBoxRandomAudio = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBoxRandomAudio = new System.Windows.Forms.GroupBox();
-            this.labelRandomAudio = new System.Windows.Forms.Label();
-            this.labelHeaderDesc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).BeginInit();
             this.groupBoxExoHeader.SuspendLayout();
+            this.groupBoxRandomAudio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).BeginInit();
             this.tabControlProperty.SuspendLayout();
             this.tabPageDefault.SuspendLayout();
@@ -99,7 +100,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.groupBoxRandomAudio.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOpenVMD
@@ -215,6 +215,38 @@
             this.groupBoxExoHeader.TabIndex = 9;
             this.groupBoxExoHeader.TabStop = false;
             this.groupBoxExoHeader.Text = "設定";
+            // 
+            // groupBoxRandomAudio
+            // 
+            this.groupBoxRandomAudio.Controls.Add(this.labelRandomAudio);
+            this.groupBoxRandomAudio.Location = new System.Drawing.Point(303, 19);
+            this.groupBoxRandomAudio.Name = "groupBoxRandomAudio";
+            this.groupBoxRandomAudio.Size = new System.Drawing.Size(368, 122);
+            this.groupBoxRandomAudio.TabIndex = 13;
+            this.groupBoxRandomAudio.TabStop = false;
+            this.groupBoxRandomAudio.Text = "同キー音声ランダムについて";
+            // 
+            // labelRandomAudio
+            // 
+            this.labelRandomAudio.AutoSize = true;
+            this.labelRandomAudio.Location = new System.Drawing.Point(6, 25);
+            this.labelRandomAudio.Name = "labelRandomAudio";
+            this.labelRandomAudio.Size = new System.Drawing.Size(357, 84);
+            this.labelRandomAudio.TabIndex = 0;
+            this.labelRandomAudio.Text = "同じキーフレームに複数の音声が割り当てられていた場合\r\n設置毎にランダムに選んだ1つだけを設置する\r\nOFFの場合は割り当てられている全ての音声が設置され\r\n一斉" +
+    "に再生されることになる";
+            // 
+            // checkBoxRandomAudio
+            // 
+            this.checkBoxRandomAudio.AutoSize = true;
+            this.checkBoxRandomAudio.Checked = true;
+            this.checkBoxRandomAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRandomAudio.Location = new System.Drawing.Point(150, 51);
+            this.checkBoxRandomAudio.Name = "checkBoxRandomAudio";
+            this.checkBoxRandomAudio.Size = new System.Drawing.Size(147, 25);
+            this.checkBoxRandomAudio.TabIndex = 14;
+            this.checkBoxRandomAudio.Text = "同キー音声ランダム";
+            this.checkBoxRandomAudio.UseVisualStyleBackColor = true;
             // 
             // labelHeaderNote
             // 
@@ -385,7 +417,7 @@
             this.tabPageAudio.Location = new System.Drawing.Point(4, 30);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(313, 362);
+            this.tabPageAudio.Size = new System.Drawing.Size(313, 359);
             this.tabPageAudio.TabIndex = 0;
             this.tabPageAudio.Text = "音声";
             // 
@@ -567,7 +599,7 @@
             this.tabPageAliasM.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasM.Name = "tabPageAliasM";
             this.tabPageAliasM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasM.Size = new System.Drawing.Size(313, 362);
+            this.tabPageAliasM.Size = new System.Drawing.Size(313, 359);
             this.tabPageAliasM.TabIndex = 1;
             this.tabPageAliasM.Text = "メディア";
             // 
@@ -587,7 +619,7 @@
             this.tabPageAliasF.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasF.Name = "tabPageAliasF";
             this.tabPageAliasF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasF.Size = new System.Drawing.Size(313, 362);
+            this.tabPageAliasF.Size = new System.Drawing.Size(313, 359);
             this.tabPageAliasF.TabIndex = 2;
             this.tabPageAliasF.Text = "フィルタ";
             // 
@@ -637,6 +669,16 @@
             this.groupBoxUsage.TabStop = false;
             this.groupBoxUsage.Text = "使い方";
             // 
+            // labelHeaderDesc
+            // 
+            this.labelHeaderDesc.AutoSize = true;
+            this.labelHeaderDesc.Location = new System.Drawing.Point(322, 25);
+            this.labelHeaderDesc.Name = "labelHeaderDesc";
+            this.labelHeaderDesc.Size = new System.Drawing.Size(292, 84);
+            this.labelHeaderDesc.TabIndex = 13;
+            this.labelHeaderDesc.Text = "幅・高・音声ビットレート・音声チャンネルは\r\nAviutlの初期読み込みが\r\n生成されたexoファイルの場合のみ意味がある\r\n先にプロジェクトが存在した場合は無視" +
+    "される";
+            // 
             // labelVersion
             // 
             this.labelVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -674,18 +716,6 @@
             this.buttonAllInv.Text = "選反転";
             this.buttonAllInv.UseVisualStyleBackColor = true;
             this.buttonAllInv.Click += new System.EventHandler(this.buttonAllInv_Click);
-            // 
-            // checkBoxRandomAudio
-            // 
-            this.checkBoxRandomAudio.AutoSize = true;
-            this.checkBoxRandomAudio.Checked = true;
-            this.checkBoxRandomAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxRandomAudio.Location = new System.Drawing.Point(150, 51);
-            this.checkBoxRandomAudio.Name = "checkBoxRandomAudio";
-            this.checkBoxRandomAudio.Size = new System.Drawing.Size(147, 25);
-            this.checkBoxRandomAudio.TabIndex = 14;
-            this.checkBoxRandomAudio.Text = "同キー音声ランダム";
-            this.checkBoxRandomAudio.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -746,36 +776,6 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 393);
             this.tableLayoutPanel4.TabIndex = 17;
             // 
-            // groupBoxRandomAudio
-            // 
-            this.groupBoxRandomAudio.Controls.Add(this.labelRandomAudio);
-            this.groupBoxRandomAudio.Location = new System.Drawing.Point(303, 19);
-            this.groupBoxRandomAudio.Name = "groupBoxRandomAudio";
-            this.groupBoxRandomAudio.Size = new System.Drawing.Size(368, 122);
-            this.groupBoxRandomAudio.TabIndex = 13;
-            this.groupBoxRandomAudio.TabStop = false;
-            this.groupBoxRandomAudio.Text = "同キー音声ランダムについて";
-            // 
-            // labelRandomAudio
-            // 
-            this.labelRandomAudio.AutoSize = true;
-            this.labelRandomAudio.Location = new System.Drawing.Point(6, 25);
-            this.labelRandomAudio.Name = "labelRandomAudio";
-            this.labelRandomAudio.Size = new System.Drawing.Size(357, 84);
-            this.labelRandomAudio.TabIndex = 0;
-            this.labelRandomAudio.Text = "同じキーフレームに複数の音声が割り当てられていた場合\r\n設置毎にランダムに選んだ1つだけを設置する\r\nOFFの場合は割り当てられている全ての音声が設置され\r\n一斉" +
-    "に再生されることになる";
-            // 
-            // labelHeaderDesc
-            // 
-            this.labelHeaderDesc.AutoSize = true;
-            this.labelHeaderDesc.Location = new System.Drawing.Point(322, 25);
-            this.labelHeaderDesc.Name = "labelHeaderDesc";
-            this.labelHeaderDesc.Size = new System.Drawing.Size(292, 84);
-            this.labelHeaderDesc.TabIndex = 13;
-            this.labelHeaderDesc.Text = "幅・高・音声ビットレート・音声チャンネルは\r\nAviutlの初期読み込みが\r\n生成されたexoファイルの場合のみ意味がある\r\n先にプロジェクトが存在した場合は無視" +
-    "される";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -794,6 +794,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).EndInit();
             this.groupBoxExoHeader.ResumeLayout(false);
             this.groupBoxExoHeader.PerformLayout();
+            this.groupBoxRandomAudio.ResumeLayout(false);
+            this.groupBoxRandomAudio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAudioCh)).EndInit();
             this.tabControlProperty.ResumeLayout(false);
             this.tabPageDefault.ResumeLayout(false);
@@ -816,8 +818,6 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.groupBoxRandomAudio.ResumeLayout(false);
-            this.groupBoxRandomAudio.PerformLayout();
             this.ResumeLayout(false);
 
         }
