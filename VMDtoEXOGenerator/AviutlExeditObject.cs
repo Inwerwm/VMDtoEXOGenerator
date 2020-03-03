@@ -37,6 +37,9 @@ namespace AviutlExEditObject
         /// <param name="streamWriter">エンコードをshift_jisにすること</param>
         public void Write(StreamWriter streamWriter)
         {
+            if (streamWriter.Encoding != System.Text.Encoding.GetEncoding("shift_jis"))
+                throw new FormatException("出力エンコード設定が不正です" + Environment.NewLine + "シフトJISを指定してください");
+
             streamWriter.Write(ToString());
             for (int i = 0; i < Objects.Count; i++)
             {
@@ -66,7 +69,7 @@ namespace AviutlExEditObject
 
             //衝突判定
             //追加するオブジェクトの始端以降の末端をもつ最初のオブジェクトの添字
-            int k = Objects.FindIndex(o => o.Layer==obj.Layer && obj.Start <= o.End);
+            int k = Objects.FindIndex(o => o.Layer == obj.Layer && obj.Start <= o.End);
             if (k < 0)
                 //非接触：同じレイヤーの既存のオブジェクトの末端よりも後
                 Objects.Add(obj);
@@ -83,7 +86,7 @@ namespace AviutlExEditObject
         }
     }
 
-    public class ExEditObject: IComparable<ExEditObject>
+    public class ExEditObject : IComparable<ExEditObject>
     {
         public int Start { set; get; }
         public int End { set; get; }
@@ -154,8 +157,47 @@ namespace AviutlExEditObject
         }
     }
 
+    public class ExEditAlias
+    {
+        public int Length { get; set; }
+        public int Camera { get; set; }
+        public bool isMedia { get; private set; }
+        public List<IExObjectType> Property { private set; get; }
+
+        public ExEditObject ToObject()
+        {
+            var obj = new ExEditObject();
+            obj.End = Length;
+            obj.Camera = Camera;
+            obj.Property.AddRange(Property);
+            return obj;
+        }
+
+        public override string ToString()
+        {
+            string output;
+            string index = "v" + (isMedia ? "o" : "");
+
+            output = "[" + index + "]\r\n";
+            output += "length=" + Length.ToString() + "\r\n";
+            if (isMedia)
+                output += "camera=" + Camera.ToString() + "\r\n";
+
+            for (int i = 0; i < Property.Count; i++)
+            {
+                output += "[" + index + "." + i.ToString() + "]" + "\r\n";
+                output += Property[i].ToString();
+            }
+
+            return output;
+        }
+    }
+
+
     public interface IExObjectType
     {
+        string Name { get; }
+
         string ToString();
 
         /// <summary>
@@ -175,6 +217,7 @@ namespace AviutlExEditObject
 
     public class ExoAudio : IExObjectType
     {
+        public string Name { get; private set; }
         public float Start { get; set; }
         public float Speed { get; set; }
         public bool Loop { get; set; }
@@ -183,6 +226,7 @@ namespace AviutlExEditObject
 
         public ExoAudio(string filePath, float start = 0, float speed = 100, bool loop = false, bool linkage = false)
         {
+            Name = "音声ファイル";
             Start = start;
             Speed = speed;
             Loop = loop;
@@ -192,6 +236,7 @@ namespace AviutlExEditObject
 
         public ExoAudio(ExoAudio audio)
         {
+            Name = "音声ファイル";
             Start = audio.Start;
             Speed = audio.Speed;
             Loop = audio.Loop;
@@ -207,7 +252,7 @@ namespace AviutlExEditObject
         public override string ToString()
         {
             string output;
-            output = "_name=音声ファイル\r\n";
+            output = "_name=" + Name + "\r\n";
             output += "再生位置=" + Start.ToString() + "\r\n";
             output += "再生速度=" + Speed.ToString() + "\r\n";
             output += "ループ再生=" + (Loop ? 1 : 0).ToString() + "\r\n";
@@ -238,17 +283,20 @@ namespace AviutlExEditObject
 
     public class ExoStandardPlay : IExObjectType
     {
+        public string Name { get; private set; }
         public float Volume { get; set; }
         public float Side { get; set; }
 
         public ExoStandardPlay(float volume = 100, float side = 0)
         {
+            Name = "標準再生";
             Volume = volume;
             Side = side;
         }
 
         public ExoStandardPlay(ExoStandardPlay sPlay)
         {
+            Name = "標準再生";
             Volume = sPlay.Volume;
             Side = sPlay.Side;
         }
@@ -261,7 +309,7 @@ namespace AviutlExEditObject
         public override string ToString()
         {
             string output;
-            output = "_name=標準再生\r\n";
+            output = "_name="+Name+"\r\n";
             output += "音量=" + Volume.ToString() + "\r\n";
             output += "左右=" + Side.ToString() + "\r\n";
             return output;
