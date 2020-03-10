@@ -19,6 +19,4 @@ namespace VMDtoEXOGenerator
             Application.Run(new MainForm());
         }
     }
-
-    
 }
