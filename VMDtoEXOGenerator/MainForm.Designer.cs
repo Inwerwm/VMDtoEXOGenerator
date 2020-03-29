@@ -73,6 +73,7 @@
             this.buttonGen = new System.Windows.Forms.Button();
             this.labelUsage = new System.Windows.Forms.Label();
             this.groupBoxUsage = new System.Windows.Forms.GroupBox();
+            this.checkBoxLog = new System.Windows.Forms.CheckBox();
             this.labelHeaderDesc = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.buttonAllF = new System.Windows.Forms.Button();
@@ -659,6 +660,7 @@
             // 
             this.groupBoxUsage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxUsage.Controls.Add(this.checkBoxLog);
             this.groupBoxUsage.Controls.Add(this.labelHeaderDesc);
             this.groupBoxUsage.Controls.Add(this.labelVersion);
             this.groupBoxUsage.Controls.Add(this.labelUsage);
@@ -668,6 +670,17 @@
             this.groupBoxUsage.TabIndex = 12;
             this.groupBoxUsage.TabStop = false;
             this.groupBoxUsage.Text = "使い方";
+            // 
+            // checkBoxLog
+            // 
+            this.checkBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxLog.AutoSize = true;
+            this.checkBoxLog.Location = new System.Drawing.Point(729, 24);
+            this.checkBoxLog.Name = "checkBoxLog";
+            this.checkBoxLog.Size = new System.Drawing.Size(123, 25);
+            this.checkBoxLog.TabIndex = 14;
+            this.checkBoxLog.Text = "ログを出力する";
+            this.checkBoxLog.UseVisualStyleBackColor = true;
             // 
             // labelHeaderDesc
             // 
@@ -875,6 +888,7 @@
         private System.Windows.Forms.GroupBox groupBoxRandomAudio;
         private System.Windows.Forms.Label labelRandomAudio;
         private System.Windows.Forms.Label labelHeaderDesc;
+        private System.Windows.Forms.CheckBox checkBoxLog;
     }
 }
 

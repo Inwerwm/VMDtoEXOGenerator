@@ -144,6 +144,8 @@ namespace VMDtoEXOGenerator
         {
             int id = listBoxSetee.SelectedIndex;
             canChangeTab = true;
+            if (id < 0)
+                tabControlProperty.SelectedIndex = 0;
             switch (ObjectList[id].Type)
             {
                 case ObjectType.Audio:
@@ -284,6 +286,10 @@ namespace VMDtoEXOGenerator
 
         private void generateExo()
         {
+            StreamWriter log = null;
+            if (checkBoxLog.Checked)
+                log = new StreamWriter($"Log_{DateTime.Now:yyyy_MM_dd_HH_mm_ss}.txt");
+            WriteLog(log,$"{DateTime.Now:yyyy_MM_dd_HH_mm_ss}");
             ExEditObjectData exo = new ExEditObjectData();
             exo.Width = int.Parse(textBoxWidth.Text);
             exo.Height = int.Parse(textBoxHeight.Text);
@@ -296,37 +302,53 @@ namespace VMDtoEXOGenerator
             //音声オブジェクト以外は未実装のため簡略化
             var AudioObjects = ObjectList.Where(o => o.Type == ObjectType.Audio).ToList();
             //var OtherObjects = ObjectList.Where(o => o.Type != ObjectType.Audio).ToList();
+            WriteLog(log,$"音声オブジェクト数 : {AudioObjects.Count}");
+            foreach (var obj in AudioObjects)
+            {
+                WriteLog(log, $"\t{Path.GetFileName(obj.Path)}");
+            }
+            WriteLog(log);
 
             //音声オブジェクトの配置
             if (checkBoxRandomAudio.Checked)
             {
+                WriteLog(log, "音声ランダム ON");
                 var rnd = new Random();
                 //同キー音声ランダム化ON
                 for (int i = 0; i < checkedListBoxKey.Items.Count; i++)
                 {
                     var key = checkedListBoxKey.Items[i].ToString();
+                    WriteLog(log, $"\tキーフレーム[{i}] : {key}");
                     var AudioObjectsPerKey = AudioObjects.Where(o => o.Keys.Contains(key)).ToList();
                     if (AudioObjectsPerKey.Any())
                     {
+                        WriteLog(log, $"\tAudioObjectsPerKey.Count : {AudioObjectsPerKey.Count}");
                         var vmdFrames = GetBasisVmdFrames(key);
+                        WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
                         foreach (var f in vmdFrames)
                         {
                             var o = AudioObjectsPerKey[rnd.Next(0, AudioObjectsPerKey.Count)];
                             exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
+                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
                         }
                     }
+                    WriteLog(log);
                 }
             }
             else
             {
+                WriteLog(log, "音声ランダム OFF");
                 foreach (var o in AudioObjects)
                 {
                     foreach (var k in o.Keys)
                     {
+                        WriteLog(log, $"\tオブジェクト : {k}");
                         var vmdFrames = GetBasisVmdFrames(k);
+                        WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
                         foreach (var f in vmdFrames)
                         {
                             exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
+                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
                         }
                     }
                 }
@@ -336,27 +358,38 @@ namespace VMDtoEXOGenerator
             //未実装のためなし
 
             //exoファイルの書き出し
+            WriteLog(log, $"音声配置処理終了{Environment.NewLine}設置するオブジェクト数：{exo.Objects.Count}");
             exo.Length = exo.Objects.Max(o => o.End);
             using (var writer = new StreamWriter("Generate_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".exo", false, System.Text.Encoding.GetEncoding("shift_jis")))
             {
                 exo.Write(writer);
             }
 
+            log?.Dispose();
             MessageBox.Show("EXOファイル出力完了" + Environment.NewLine + "実行ファイルと同じディレクトリに出力しました");
         }
 
         private List<IVmdModelFrameData> GetBasisVmdFrames(string key)
         {
             var vmdFrames = new List<IVmdModelFrameData>();
-            vmdFrames.AddRange(vmd.MotionFrames.Where(f => f.Name == key).Select(f => (IVmdModelFrameData)f).ToList());
-            vmdFrames.AddRange(vmd.MorphFrames.Where(f => f.Name == key).Select(f => (IVmdModelFrameData)f).ToList());
+            vmdFrames.AddRange(vmd.MotionFrames.Where(f => f.Name.Trim('\0') == key).Select(f => (IVmdModelFrameData)f).ToList());
+            vmdFrames.AddRange(vmd.MorphFrames.Where(f => f.Name.Trim('\0') == key).Select(f => (IVmdModelFrameData)f).ToList());
             //初期位置は全てのボーンとモーフが含まれている可能性が高いため除去
             vmdFrames.RemoveAll(f => f.FrameTime == 0);
 
             vmdFrames.Sort();
             return vmdFrames;
         }
+
+        void WriteLog(StreamWriter writer, string message = "")
+        {
+            if (!checkBoxLog.Checked)
+                return;
+
+            writer.WriteLine(message);
+        }
     }
+
 
     public enum ObjectType
     {
