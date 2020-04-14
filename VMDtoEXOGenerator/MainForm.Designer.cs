@@ -53,6 +53,8 @@
             this.tabPageDefault = new System.Windows.Forms.TabPage();
             this.labelObj = new System.Windows.Forms.Label();
             this.tabPageAudio = new System.Windows.Forms.TabPage();
+            this.labelAFramePlotStartDesc = new System.Windows.Forms.Label();
+            this.labelAFrameSpanDesc = new System.Windows.Forms.Label();
             this.buttonAPlay = new System.Windows.Forms.Button();
             this.labelAPath = new System.Windows.Forms.Label();
             this.numericAVolume = new System.Windows.Forms.NumericUpDown();
@@ -60,10 +62,14 @@
             this.numericAPan = new System.Windows.Forms.NumericUpDown();
             this.numericAPlayPos = new System.Windows.Forms.NumericUpDown();
             this.labelVolume = new System.Windows.Forms.Label();
+            this.numericAFramePlotStart = new System.Windows.Forms.NumericUpDown();
+            this.numericAFrameSpan = new System.Windows.Forms.NumericUpDown();
             this.numericAStartOffset = new System.Windows.Forms.NumericUpDown();
             this.labelAPan = new System.Windows.Forms.Label();
             this.labelAPlaySpeed = new System.Windows.Forms.Label();
             this.labelAPlayPos = new System.Windows.Forms.Label();
+            this.labelAFramePlotStart = new System.Windows.Forms.Label();
+            this.labelAFrameSpan = new System.Windows.Forms.Label();
             this.labelAStartOffset = new System.Windows.Forms.Label();
             this.textBoxAFilePath = new System.Windows.Forms.TextBox();
             this.tabPageAliasM = new System.Windows.Forms.TabPage();
@@ -92,6 +98,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlaySpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlayPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAFramePlotStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAFrameSpan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAStartOffset)).BeginInit();
             this.tabPageAliasM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMedia)).BeginInit();
@@ -134,7 +142,7 @@
             this.listBoxSetee.ItemHeight = 21;
             this.listBoxSetee.Location = new System.Drawing.Point(3, 70);
             this.listBoxSetee.Name = "listBoxSetee";
-            this.listBoxSetee.Size = new System.Drawing.Size(253, 319);
+            this.listBoxSetee.Size = new System.Drawing.Size(253, 382);
             this.listBoxSetee.TabIndex = 4;
             this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
@@ -148,7 +156,7 @@
             this.checkedListBoxKey.FormattingEnabled = true;
             this.checkedListBoxKey.Location = new System.Drawing.Point(3, 72);
             this.checkedListBoxKey.Name = "checkedListBoxKey";
-            this.checkedListBoxKey.Size = new System.Drawing.Size(254, 316);
+            this.checkedListBoxKey.Size = new System.Drawing.Size(254, 364);
             this.checkedListBoxKey.TabIndex = 5;
             this.checkedListBoxKey.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxKey_ItemCheck);
             // 
@@ -374,7 +382,7 @@
             this.tabControlProperty.Location = new System.Drawing.Point(268, 3);
             this.tabControlProperty.Name = "tabControlProperty";
             this.tabControlProperty.SelectedIndex = 0;
-            this.tabControlProperty.Size = new System.Drawing.Size(321, 393);
+            this.tabControlProperty.Size = new System.Drawing.Size(321, 455);
             this.tabControlProperty.TabIndex = 0;
             this.tabControlProperty.TabStop = false;
             this.tabControlProperty.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControlProperty_Selecting);
@@ -386,7 +394,7 @@
             this.tabPageDefault.Location = new System.Drawing.Point(4, 30);
             this.tabPageDefault.Name = "tabPageDefault";
             this.tabPageDefault.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefault.Size = new System.Drawing.Size(313, 359);
+            this.tabPageDefault.Size = new System.Drawing.Size(313, 421);
             this.tabPageDefault.TabIndex = 3;
             // 
             // labelObj
@@ -402,6 +410,8 @@
             // tabPageAudio
             // 
             this.tabPageAudio.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageAudio.Controls.Add(this.labelAFramePlotStartDesc);
+            this.tabPageAudio.Controls.Add(this.labelAFrameSpanDesc);
             this.tabPageAudio.Controls.Add(this.buttonAPlay);
             this.tabPageAudio.Controls.Add(this.labelAPath);
             this.tabPageAudio.Controls.Add(this.numericAVolume);
@@ -409,24 +419,48 @@
             this.tabPageAudio.Controls.Add(this.numericAPan);
             this.tabPageAudio.Controls.Add(this.numericAPlayPos);
             this.tabPageAudio.Controls.Add(this.labelVolume);
+            this.tabPageAudio.Controls.Add(this.numericAFramePlotStart);
+            this.tabPageAudio.Controls.Add(this.numericAFrameSpan);
             this.tabPageAudio.Controls.Add(this.numericAStartOffset);
             this.tabPageAudio.Controls.Add(this.labelAPan);
             this.tabPageAudio.Controls.Add(this.labelAPlaySpeed);
             this.tabPageAudio.Controls.Add(this.labelAPlayPos);
+            this.tabPageAudio.Controls.Add(this.labelAFramePlotStart);
+            this.tabPageAudio.Controls.Add(this.labelAFrameSpan);
             this.tabPageAudio.Controls.Add(this.labelAStartOffset);
             this.tabPageAudio.Controls.Add(this.textBoxAFilePath);
             this.tabPageAudio.Location = new System.Drawing.Point(4, 30);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(313, 359);
+            this.tabPageAudio.Size = new System.Drawing.Size(313, 421);
             this.tabPageAudio.TabIndex = 0;
             this.tabPageAudio.Text = "音声";
+            // 
+            // labelAFramePlotStartDesc
+            // 
+            this.labelAFramePlotStartDesc.AutoSize = true;
+            this.labelAFramePlotStartDesc.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelAFramePlotStartDesc.Location = new System.Drawing.Point(156, 296);
+            this.labelAFramePlotStartDesc.Name = "labelAFramePlotStartDesc";
+            this.labelAFramePlotStartDesc.Size = new System.Drawing.Size(151, 80);
+            this.labelAFramePlotStartDesc.TabIndex = 4;
+            this.labelAFramePlotStartDesc.Text = "フレーム設置間隔内の\r\n設置位置を指定\r\n同キー音声ランダム時\r\n対象内での一致が必要";
+            // 
+            // labelAFrameSpanDesc
+            // 
+            this.labelAFrameSpanDesc.AutoSize = true;
+            this.labelAFrameSpanDesc.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelAFrameSpanDesc.Location = new System.Drawing.Point(156, 227);
+            this.labelAFrameSpanDesc.Name = "labelAFrameSpanDesc";
+            this.labelAFrameSpanDesc.Size = new System.Drawing.Size(152, 60);
+            this.labelAFrameSpanDesc.TabIndex = 4;
+            this.labelAFrameSpanDesc.Text = "設定数に一回設置\r\n同キー音声ランダム時\r\n対象内の最大値を使用";
             // 
             // buttonAPlay
             // 
             this.buttonAPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAPlay.Location = new System.Drawing.Point(10, 325);
+            this.buttonAPlay.Location = new System.Drawing.Point(10, 387);
             this.buttonAPlay.Name = "buttonAPlay";
             this.buttonAPlay.Size = new System.Drawing.Size(293, 34);
             this.buttonAPlay.TabIndex = 3;
@@ -532,6 +566,52 @@
             this.labelVolume.TabIndex = 0;
             this.labelVolume.Text = "音量";
             // 
+            // numericAFramePlotStart
+            // 
+            this.numericAFramePlotStart.Location = new System.Drawing.Point(10, 307);
+            this.numericAFramePlotStart.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericAFramePlotStart.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericAFramePlotStart.Name = "numericAFramePlotStart";
+            this.numericAFramePlotStart.Size = new System.Drawing.Size(140, 29);
+            this.numericAFramePlotStart.TabIndex = 1;
+            this.numericAFramePlotStart.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericAFramePlotStart.ValueChanged += new System.EventHandler(this.numericAFramePlotStart_ValueChanged);
+            // 
+            // numericAFrameSpan
+            // 
+            this.numericAFrameSpan.Location = new System.Drawing.Point(10, 251);
+            this.numericAFrameSpan.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericAFrameSpan.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericAFrameSpan.Name = "numericAFrameSpan";
+            this.numericAFrameSpan.Size = new System.Drawing.Size(140, 29);
+            this.numericAFrameSpan.TabIndex = 1;
+            this.numericAFrameSpan.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericAFrameSpan.ValueChanged += new System.EventHandler(this.numericAFrameSpan_ValueChanged);
+            // 
             // numericAStartOffset
             // 
             this.numericAStartOffset.Location = new System.Drawing.Point(10, 83);
@@ -574,6 +654,24 @@
             this.labelAPlayPos.TabIndex = 0;
             this.labelAPlayPos.Text = "再生位置";
             // 
+            // labelAFramePlotStart
+            // 
+            this.labelAFramePlotStart.AutoSize = true;
+            this.labelAFramePlotStart.Location = new System.Drawing.Point(6, 283);
+            this.labelAFramePlotStart.Name = "labelAFramePlotStart";
+            this.labelAFramePlotStart.Size = new System.Drawing.Size(90, 21);
+            this.labelAFramePlotStart.TabIndex = 0;
+            this.labelAFramePlotStart.Text = "設置開始番";
+            // 
+            // labelAFrameSpan
+            // 
+            this.labelAFrameSpan.AutoSize = true;
+            this.labelAFrameSpan.Location = new System.Drawing.Point(6, 227);
+            this.labelAFrameSpan.Name = "labelAFrameSpan";
+            this.labelAFrameSpan.Size = new System.Drawing.Size(118, 21);
+            this.labelAFrameSpan.TabIndex = 0;
+            this.labelAFrameSpan.Text = "フレーム設置間隔";
+            // 
             // labelAStartOffset
             // 
             this.labelAStartOffset.AutoSize = true;
@@ -600,7 +698,7 @@
             this.tabPageAliasM.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasM.Name = "tabPageAliasM";
             this.tabPageAliasM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasM.Size = new System.Drawing.Size(313, 359);
+            this.tabPageAliasM.Size = new System.Drawing.Size(313, 421);
             this.tabPageAliasM.TabIndex = 1;
             this.tabPageAliasM.Text = "メディア";
             // 
@@ -620,7 +718,7 @@
             this.tabPageAliasF.Location = new System.Drawing.Point(4, 30);
             this.tabPageAliasF.Name = "tabPageAliasF";
             this.tabPageAliasF.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAliasF.Size = new System.Drawing.Size(313, 359);
+            this.tabPageAliasF.Size = new System.Drawing.Size(313, 421);
             this.tabPageAliasF.TabIndex = 2;
             this.tabPageAliasF.Text = "フィルタ";
             // 
@@ -638,7 +736,7 @@
             this.buttonGen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGen.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.buttonGen.Location = new System.Drawing.Point(16, 800);
+            this.buttonGen.Location = new System.Drawing.Point(16, 862);
             this.buttonGen.Name = "buttonGen";
             this.buttonGen.Size = new System.Drawing.Size(858, 57);
             this.buttonGen.TabIndex = 10;
@@ -746,7 +844,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(858, 399);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(858, 461);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // tableLayoutPanel2
@@ -767,7 +865,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 393);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 455);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
             // tableLayoutPanel4
@@ -786,14 +884,14 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 393);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(259, 455);
             this.tableLayoutPanel4.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 869);
+            this.ClientSize = new System.Drawing.Size(884, 931);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBoxUsage);
             this.Controls.Add(this.buttonGen);
@@ -801,7 +899,7 @@
             this.Controls.Add(this.buttonOpenVMD);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(899, 898);
+            this.MinimumSize = new System.Drawing.Size(900, 970);
             this.Name = "MainForm";
             this.Text = "VMD to EXO Generator";
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).EndInit();
@@ -819,6 +917,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlaySpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAPlayPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAFramePlotStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAFrameSpan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAStartOffset)).EndInit();
             this.tabPageAliasM.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMedia)).EndInit();
@@ -889,6 +989,12 @@
         private System.Windows.Forms.Label labelRandomAudio;
         private System.Windows.Forms.Label labelHeaderDesc;
         private System.Windows.Forms.CheckBox checkBoxLog;
+        private System.Windows.Forms.NumericUpDown numericAFrameSpan;
+        private System.Windows.Forms.Label labelAFrameSpan;
+        private System.Windows.Forms.Label labelAFrameSpanDesc;
+        private System.Windows.Forms.NumericUpDown numericAFramePlotStart;
+        private System.Windows.Forms.Label labelAFramePlotStart;
+        private System.Windows.Forms.Label labelAFramePlotStartDesc;
     }
 }
 

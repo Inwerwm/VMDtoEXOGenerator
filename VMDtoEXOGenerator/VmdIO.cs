@@ -48,7 +48,13 @@ namespace VmdIO
             LightFrames = new List<VmdLightFrameData>();
             ShadowFrames = new List<VmdShadowFrameData>();
             PropertyFrames = new List<VmdPropertyFrameData>();
-            Read(reader);
+            try
+            {
+                Read(reader);
+            }
+            catch (EndOfStreamException)
+            {
+            }
         }
 
         public void Clear()

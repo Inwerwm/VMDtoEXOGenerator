@@ -56,10 +56,7 @@ namespace VMDtoEXOGenerator
                 {
                     case ".wav":
                     case ".mp3":
-                        if (!ObjectList.Select(o => o.Path).Contains(str))
-                        {
-                            ObjectList.Add(new ObjectData(str, ObjectType.Audio, makeAudioObject(str)));
-                        }
+                        ObjectList.Add(new ObjectData(str, ObjectType.Audio, makeAudioObject(str)));
                         break;
                     default:
                         MessageBox.Show(Path.GetExtension(str).Skip(1).ToString() + "ファイルには対応していません");
@@ -237,6 +234,19 @@ namespace VMDtoEXOGenerator
             ObjectList[id].ExObject.Property[1].SetBy(l);
         }
 
+        private void numericAFrameSpan_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            ObjectList[id].FrameSpan = (int)numericAFrameSpan.Value;
+            numericAFramePlotStart.Maximum = (int)numericAFrameSpan.Value;
+        }
+
+        private void numericAFramePlotStart_ValueChanged(object sender, EventArgs e)
+        {
+            int id = listBoxSetee.SelectedIndex;
+            ObjectList[id].FrameSpanPlotStart = (int)numericAFramePlotStart.Value - 1;
+        }
+
         private void checkedListBoxKey_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (skipCheckListChange)
@@ -289,7 +299,7 @@ namespace VMDtoEXOGenerator
             StreamWriter log = null;
             if (checkBoxLog.Checked)
                 log = new StreamWriter($"Log_{DateTime.Now:yyyy_MM_dd_HH_mm_ss}.txt");
-            WriteLog(log,$"{DateTime.Now:yyyy_MM_dd_HH_mm_ss}");
+            WriteLog(log, $"{DateTime.Now:yyyy_MM_dd_HH_mm_ss}");
             ExEditObjectData exo = new ExEditObjectData();
             exo.Width = int.Parse(textBoxWidth.Text);
             exo.Height = int.Parse(textBoxHeight.Text);
@@ -302,7 +312,7 @@ namespace VMDtoEXOGenerator
             //音声オブジェクト以外は未実装のため簡略化
             var AudioObjects = ObjectList.Where(o => o.Type == ObjectType.Audio).ToList();
             //var OtherObjects = ObjectList.Where(o => o.Type != ObjectType.Audio).ToList();
-            WriteLog(log,$"音声オブジェクト数 : {AudioObjects.Count}");
+            WriteLog(log, $"音声オブジェクト数 : {AudioObjects.Count}");
             foreach (var obj in AudioObjects)
             {
                 WriteLog(log, $"\t{Path.GetFileName(obj.Path)}");
@@ -320,13 +330,24 @@ namespace VMDtoEXOGenerator
                     var key = checkedListBoxKey.Items[i].ToString();
                     WriteLog(log, $"\tキーフレーム[{i}] : {key}");
                     var AudioObjectsPerKey = AudioObjects.Where(o => o.Keys.Contains(key)).ToList();
+                    var frameSpan = AudioObjectsPerKey.Max(o => o.FrameSpan);
                     if (AudioObjectsPerKey.Any())
                     {
+                        var plotStartsUnique = AudioObjectsPerKey.Select(o => o.FrameSpanPlotStart).Distinct();
+                        if (plotStartsUnique.Count() != 1)
+                        {
+                            MessageBox.Show($"同じキーフレームに設置する音声オブジェクトの設置開始番が一致していません{Environment.NewLine}設置開始番を一致させるか、同キー音声ランダムをOFFにしてください");
+                            return;
+                        }
+                        var plotStart = plotStartsUnique.First();
+
                         WriteLog(log, $"\tAudioObjectsPerKey.Count : {AudioObjectsPerKey.Count}");
                         var vmdFrames = GetBasisVmdFrames(key);
                         WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
-                        foreach (var f in vmdFrames)
+                        foreach (var (f, j) in vmdFrames.Select((item, id) => (item, id)))
                         {
+                            if (j % frameSpan != plotStart)
+                                continue;
                             var o = AudioObjectsPerKey[rnd.Next(0, AudioObjectsPerKey.Count)];
                             exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
                             WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
@@ -345,8 +366,10 @@ namespace VMDtoEXOGenerator
                         WriteLog(log, $"\tオブジェクト : {k}");
                         var vmdFrames = GetBasisVmdFrames(k);
                         WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
-                        foreach (var f in vmdFrames)
+                        foreach (var (f, i) in vmdFrames.Select((item, id) => (item, id)))
                         {
+                            if (i % o.FrameSpan != o.FrameSpanPlotStart)
+                                continue;
                             exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
                             WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
                         }
@@ -409,6 +432,8 @@ namespace VMDtoEXOGenerator
         /// 30fps
         /// </summary>
         public int Offset { get; set; }
+        public int FrameSpan { get; set; }
+        public int FrameSpanPlotStart { get; set; }
         public ExEditObject ExObject { get; set; }
         public List<string> Keys { get; private set; }
 
@@ -423,6 +448,8 @@ namespace VMDtoEXOGenerator
             Path = path;
             Type = type;
             Offset = offset;
+            FrameSpan = 1;
+            FrameSpanPlotStart = 0;
             ExObject = obj;
             Keys = new List<string>();
 
