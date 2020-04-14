@@ -349,8 +349,8 @@ namespace VMDtoEXOGenerator
                             if (j % frameSpan != plotStart)
                                 continue;
                             var o = AudioObjectsPerKey[rnd.Next(0, AudioObjectsPerKey.Count)];
-                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
-                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
+                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime + 1));
+                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime + 1} に設置");
                         }
                     }
                     WriteLog(log);
@@ -370,8 +370,8 @@ namespace VMDtoEXOGenerator
                         {
                             if (i % o.FrameSpan != o.FrameSpanPlotStart)
                                 continue;
-                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime));
-                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime} に設置");
+                            exo.ObjectsSafeAdd(o.GetExEditObjectAt((int)f.FrameTime + 1));
+                            WriteLog(log, $"\t\t{Path.GetFileName(o.Path)} を {f.FrameTime + 1} に設置");
                         }
                     }
                 }
