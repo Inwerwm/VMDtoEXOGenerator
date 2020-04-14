@@ -1,11 +1,12 @@
 ﻿using AviutlExEditObject;
+using MikuMikuMethods;
+using MikuMikuMethods.Vmd;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using VmdIO;
 
 namespace VMDtoEXOGenerator
 {
