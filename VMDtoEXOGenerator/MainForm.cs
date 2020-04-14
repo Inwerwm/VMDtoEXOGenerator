@@ -342,7 +342,7 @@ namespace VMDtoEXOGenerator
                         var plotStart = plotStartsUnique.First();
 
                         WriteLog(log, $"\tAudioObjectsPerKey.Count : {AudioObjectsPerKey.Count}");
-                        var vmdFrames = GetBasisVmdFrames(key);
+                        var vmdFrames = GetBasisVmdFrames(key, checkBoxIgnoreZeroFrame.Checked);
                         WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
                         foreach (var (f, j) in vmdFrames.Select((item, id) => (item, id)))
                         {
@@ -364,7 +364,7 @@ namespace VMDtoEXOGenerator
                     foreach (var k in o.Keys)
                     {
                         WriteLog(log, $"\tオブジェクト : {k}");
-                        var vmdFrames = GetBasisVmdFrames(k);
+                        var vmdFrames = GetBasisVmdFrames(k, checkBoxIgnoreZeroFrame.Checked);
                         WriteLog(log, $"\tvmdFrames.Count : {vmdFrames.Count}");
                         foreach (var (f, i) in vmdFrames.Select((item, id) => (item, id)))
                         {
@@ -392,13 +392,13 @@ namespace VMDtoEXOGenerator
             MessageBox.Show("EXOファイル出力完了" + Environment.NewLine + "実行ファイルと同じディレクトリに出力しました");
         }
 
-        private List<IVmdModelFrameData> GetBasisVmdFrames(string key)
+        private List<IVmdModelFrameData> GetBasisVmdFrames(string key, bool isIgnoreZero)
         {
             var vmdFrames = new List<IVmdModelFrameData>();
             vmdFrames.AddRange(vmd.MotionFrames.Where(f => f.Name.Trim('\0') == key).Select(f => (IVmdModelFrameData)f).ToList());
             vmdFrames.AddRange(vmd.MorphFrames.Where(f => f.Name.Trim('\0') == key).Select(f => (IVmdModelFrameData)f).ToList());
-            //初期位置は全てのボーンとモーフが含まれている可能性が高いため除去
-            vmdFrames.RemoveAll(f => f.FrameTime == 0);
+            if (isIgnoreZero)
+                vmdFrames.RemoveAll(f => f.FrameTime == 0);
 
             vmdFrames.Sort();
             return vmdFrames;
@@ -478,6 +478,8 @@ namespace VMDtoEXOGenerator
             {
                 Audio.Position = 0;
                 Player.Init(Audio);
+                var volumeRatio = ((float)ExObject.Property[1].ToList()[0]) / 100f;
+                Player.Volume = volumeRatio.IsWithin(0, 1) ? volumeRatio : 1;
                 Player.Play();
                 playingAudio = Audio;
                 Player.PlaybackStopped += handler;
@@ -488,6 +490,8 @@ namespace VMDtoEXOGenerator
                 Player = new WaveOut();
                 Audio.Position = 0;
                 Player.Init(Audio);
+                var volumeRatio = ((float)ExObject.Property[1].ToList()[0]) / 100f;
+                Player.Volume = volumeRatio.IsWithin(0, 1) ? volumeRatio : 1;
                 Player.Play();
                 playingAudio = Audio;
                 Player.PlaybackStopped += handler;

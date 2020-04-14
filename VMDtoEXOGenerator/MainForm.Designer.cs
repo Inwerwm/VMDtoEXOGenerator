@@ -86,6 +86,7 @@
             this.buttonAllInv = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBoxIgnoreZeroFrame = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.numericFPS)).BeginInit();
             this.groupBoxExoHeader.SuspendLayout();
@@ -142,7 +143,7 @@
             this.listBoxSetee.ItemHeight = 21;
             this.listBoxSetee.Location = new System.Drawing.Point(3, 70);
             this.listBoxSetee.Name = "listBoxSetee";
-            this.listBoxSetee.Size = new System.Drawing.Size(253, 382);
+            this.listBoxSetee.Size = new System.Drawing.Size(253, 613);
             this.listBoxSetee.TabIndex = 4;
             this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
@@ -154,7 +155,7 @@
             this.checkedListBoxKey.CheckOnClick = true;
             this.tableLayoutPanel2.SetColumnSpan(this.checkedListBoxKey, 2);
             this.checkedListBoxKey.FormattingEnabled = true;
-            this.checkedListBoxKey.Location = new System.Drawing.Point(3, 72);
+            this.checkedListBoxKey.Location = new System.Drawing.Point(3, 84);
             this.checkedListBoxKey.Name = "checkedListBoxKey";
             this.checkedListBoxKey.Size = new System.Drawing.Size(254, 364);
             this.checkedListBoxKey.TabIndex = 5;
@@ -162,8 +163,9 @@
             // 
             // labelKey
             // 
+            this.labelKey.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelKey.AutoSize = true;
-            this.labelKey.Location = new System.Drawing.Point(3, 0);
+            this.labelKey.Location = new System.Drawing.Point(3, 12);
             this.labelKey.Name = "labelKey";
             this.labelKey.Size = new System.Drawing.Size(108, 21);
             this.labelKey.TabIndex = 6;
@@ -806,9 +808,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAllF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAllF.Location = new System.Drawing.Point(3, 26);
+            this.buttonAllF.Location = new System.Drawing.Point(3, 48);
             this.buttonAllF.Name = "buttonAllF";
-            this.buttonAllF.Size = new System.Drawing.Size(124, 40);
+            this.buttonAllF.Size = new System.Drawing.Size(124, 30);
             this.buttonAllF.TabIndex = 13;
             this.buttonAllF.Text = "全非選";
             this.buttonAllF.UseVisualStyleBackColor = true;
@@ -820,9 +822,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAllInv.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAllInv.Location = new System.Drawing.Point(133, 26);
+            this.buttonAllInv.Location = new System.Drawing.Point(133, 48);
             this.buttonAllInv.Name = "buttonAllInv";
-            this.buttonAllInv.Size = new System.Drawing.Size(124, 40);
+            this.buttonAllInv.Size = new System.Drawing.Size(124, 30);
             this.buttonAllInv.TabIndex = 13;
             this.buttonAllInv.Text = "選反転";
             this.buttonAllInv.UseVisualStyleBackColor = true;
@@ -859,14 +861,26 @@
             this.tableLayoutPanel2.Controls.Add(this.checkedListBoxKey, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.buttonAllF, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.buttonAllInv, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxIgnoreZeroFrame, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(595, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 455);
             this.tableLayoutPanel2.TabIndex = 16;
+            // 
+            // checkBoxIgnoreZeroFrame
+            // 
+            this.checkBoxIgnoreZeroFrame.AutoSize = true;
+            this.checkBoxIgnoreZeroFrame.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.checkBoxIgnoreZeroFrame.Location = new System.Drawing.Point(133, 3);
+            this.checkBoxIgnoreZeroFrame.Name = "checkBoxIgnoreZeroFrame";
+            this.checkBoxIgnoreZeroFrame.Size = new System.Drawing.Size(119, 38);
+            this.checkBoxIgnoreZeroFrame.TabIndex = 14;
+            this.checkBoxIgnoreZeroFrame.Text = "設置時に\r\n0フレーム目を無視";
+            this.checkBoxIgnoreZeroFrame.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -995,6 +1009,7 @@
         private System.Windows.Forms.NumericUpDown numericAFramePlotStart;
         private System.Windows.Forms.Label labelAFramePlotStart;
         private System.Windows.Forms.Label labelAFramePlotStartDesc;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreZeroFrame;
     }
 }
 
