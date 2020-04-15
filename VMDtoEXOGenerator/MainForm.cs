@@ -199,6 +199,9 @@ namespace VMDtoEXOGenerator
             numericAVolume.Value = (decimal)(float)pList[0];
             //1:Side
             numericAPan.Value = (decimal)(float)pList[1];
+
+            numericAFrameSpan.Value = ObjectList[id].FrameSpan;
+            numericAFramePlotStart.Value = ObjectList[id].FrameSpanPlotStart + 1;
         }
 
         private void numericAStartOffset_ValueChanged(object sender, EventArgs e)

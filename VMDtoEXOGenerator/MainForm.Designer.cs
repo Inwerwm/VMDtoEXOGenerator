@@ -143,7 +143,7 @@
             this.listBoxSetee.ItemHeight = 21;
             this.listBoxSetee.Location = new System.Drawing.Point(3, 70);
             this.listBoxSetee.Name = "listBoxSetee";
-            this.listBoxSetee.Size = new System.Drawing.Size(253, 613);
+            this.listBoxSetee.Size = new System.Drawing.Size(253, 382);
             this.listBoxSetee.TabIndex = 4;
             this.listBoxSetee.SelectedIndexChanged += new System.EventHandler(this.listBoxSetee_SelectedIndexChanged);
             // 
